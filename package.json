@@ -1,0 +1,12 @@
+{
+  "name": "amp-what-acceptance-test",
+  "version": "0.0.1",
+  "license": "private",
+  "description": "Acceptance Tests for amp-what.com, written in Gauge",
+  "scripts": {
+    "test": "gauge run specs/"
+  },
+  "dependencies": {
+    "taiko": "latest"
+  }
+}

@@ -35,8 +35,21 @@ step("Search for <query>", async (query) => {
   await write(query)
 })
 
-step("Page contains <content>", async (content) => {
-  assert.ok(await text(content).exists())
+step("Type <arg0> slowly", async function(q) {
+  await write(q, {delay: 300})
+});
+
+
+step("Search for the first <n> of <queries>", async (n, queries) => {
+  const qs = queries.split("\n").slice(0, n).map(s => s.trim())
+  for (const q of qs) {
+    await focus(textBox({placeholder: 'type to search'}))
+    await clear()
+    await write(q, {delay: 1})
+    assert.ok(await text(q === 'checkbox' ? 'check' : q).exists())
+    const e = textBox({ placeholder: 'type to search' })
+    assert.equal(q, await e.value())
+  }
 })
 
 step("Visit amp-what", async function () {
@@ -55,6 +68,11 @@ step("I see the <content> character", async function (content) {
   assert.ok(await text(content).exists())
 })
 
+step("Page contains <content>", async (content) => {
+  assert.ok(await text(content).exists())
+})
+
+
 step("Click link <arg0>", async function (text) {
   await click(text)
 })
@@ -69,6 +87,6 @@ step("The URL is now <arg0>", async function (arg0) {
 })
 
 step("The query box contains <arg0>", async function (arg0) {
-  const e = textBox({placeholder: 'type to search'})
+  const e = textBox({ placeholder: 'type to search' })
   assert.equal(arg0, await e.value())
 })

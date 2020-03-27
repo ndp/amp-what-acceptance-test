@@ -7,7 +7,11 @@
 * Search for "money"
 * I see the "$" symbol
 * I see the "euro" symbol     
-
+* I see the "money-mouth face" symbol
+* Click link "money-mouth face"
+* Click link "supplemental symbols and pictographs"
+* Page contains "circled cross formee four dots"
+* Page contains "nazar amulet"
 
 ## Click on all the sample queries
 * Visit amp-what
@@ -99,14 +103,18 @@
 * Click link "ligature latin"
 * I see the "latin small ligature" character
 
-
-## Use the music help page
+## Search for a really long string
 * Visit amp-what
-* Click link "Help"
-* Click link "♫"
-* I see the "beamed sixteenth notes" character
+* Type "right-pointing double angle quotation mark" slowly
+* I see the "right-pointing double angle quotation mark" character
 
-* Click link "Helpxxx"
-* Click link "/note|music/ (♫)"
-* I see the "beamed sixteenth notes" character
+Use the music help page
+Visit amp-what
+Click link "Help"
+Click link "♫"
+I see the "beamed sixteenth notes" character
+
+Click link "Helpxxx"
+Click link "/note|music/ (♫)"
+I see the "beamed sixteenth notes" character
 

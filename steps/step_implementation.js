@@ -14,6 +14,8 @@ const {
         textBox,
         toRightOf,
         write,
+        getConfig,
+        setConfig,
       }        = require('taiko')
 const assert   = require("assert")
 const headless = process.env.headless_chrome.toLowerCase() === 'true'
@@ -35,18 +37,28 @@ step("Search for <query>", async (query) => {
   await write(query)
 })
 
-step("Type <arg0> slowly", async function(q) {
-  await write(q, {delay: 300})
-});
+step("Type <arg0> slowly", async function (q) {
+  await write(q, { delay: 300 })
+})
 
 
-step("Search for the first <n> of <queries>", async (n, queries) => {
-  const qs = queries.split("\n").slice(0, n).map(s => s.trim())
+step("Search for lines <n> of <queries>", async (range, queries) => {
+  const [first, last] = range.split('-')
+  const qs            = queries.split("\n").slice(first - 1, last).map(s => s.trim())
   for (const q of qs) {
-    await focus(textBox({placeholder: 'type to search'}))
+    await focus(textBox({ placeholder: 'type to search' }))
     await clear()
-    await write(q, {delay: 1})
-    assert.ok(await text(q === 'checkbox' ? 'check' : q).exists())
+    await write(q, { delay: 1 })
+    const match = {
+                    '/&\\w/':       '&sol',
+                    '/note|music/': 'musical symbol coda',
+                    'checkbox':       'check',
+                    'emoticon':     'kissing face',
+                    'home':         'house garden',
+                    'search':       'magnifying glass',
+                  }[q] || q
+    q === 'checkbox' ? 'check' : q
+    assert.ok(await text(match).exists())
     const e = textBox({ placeholder: 'type to search' })
     assert.equal(q, await e.value())
   }

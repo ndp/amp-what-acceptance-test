@@ -10,8 +10,10 @@ const {
         openBrowser,
         press,
         screenshot,
+        setViewPort,
         text,
         textBox,
+        title,
         toRightOf,
         write,
         getConfig,
@@ -41,6 +43,14 @@ step("Type <arg0> slowly", async function (q) {
   await write(q, { delay: 300 })
 })
 
+step('The page title is <expectedTitle>', async expectedTitle => {
+  assert.equal(expectedTitle, await title())
+})
+
+step('The page title has <word>', async word => {
+  assert.equal(`&what search "${word}" Unicode characters & entities`, await title())
+})
+
 
 step("Search for lines <n> of <queries>", async (range, queries) => {
   const [first, last] = range.split('-')
@@ -52,7 +62,7 @@ step("Search for lines <n> of <queries>", async (range, queries) => {
     const match = {
                     '/&\\w/':       '&sol',
                     '/note|music/': 'musical symbol coda',
-                    'checkbox':       'check',
+                    'checkbox':     'check',
                     'emoticon':     'kissing face',
                     'home':         'house garden',
                     'search':       'magnifying glass',
@@ -67,6 +77,12 @@ step("Search for lines <n> of <queries>", async (range, queries) => {
 step("Visit amp-what", async function () {
   await goto('http://amp-what.com/')
 })
+
+step("Visit amp-what on a phone", async function () {
+  await setViewPort({ width: 600, height: 800 })
+  await goto('http://amp-what.com/')
+})
+
 
 step("Visit <arg0>", async function (path) {
   await goto(`http://ampwhat.com${path}`)

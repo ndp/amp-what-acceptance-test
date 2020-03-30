@@ -3,8 +3,10 @@
 ## A first visit to Amp-What
 
 * Visit amp-what
+* The page title is "&what: Discover Unicode & HTML Character Entities"
 * Page contains "Andrew J. Peterson. All Rights Reserved"
 * Search for "money"
+* The page title has "money"
 * I see the "$" symbol
 * I see the "euro" symbol     
 * I see the "money-mouth face" symbol

@@ -1,13 +1,17 @@
 /* globals gauge*/
 "use strict"
 const {
+        $,
         clear,
         click,
         closeBrowser,
         currentURL,
+        evaluate,
         focus,
         goto,
         openBrowser,
+        overridePermissions,
+        paste,
         press,
         screenshot,
         setViewPort,
@@ -22,6 +26,9 @@ const {
 const assert   = require("assert")
 const headless = process.env.headless_chrome.toLowerCase() === 'true'
 
+const $TEXT_BOX = { placeholder: 'type to search' }
+
+
 beforeSuite(async () => {
   await openBrowser({ headless: headless })
 })
@@ -33,6 +40,20 @@ afterSuite(async () => {
 gauge.screenshotFn = async function () {
   return await screenshot({ encoding: 'base64' })
 }
+
+step("Visit amp-what", async function () {
+  await goto('https://amp-what.com/')
+})
+
+step("Visit amp-what on a phone", async function () {
+  await setViewPort({ width: 600, height: 800 })
+  await goto('https://amp-what.com/')
+})
+
+
+step("Visit <arg0>", async function (path) {
+  await goto(`https://amp-what.com${path}`)
+})
 
 step("Search for <query>", async (query) => {
   await clear()
@@ -56,7 +77,7 @@ step("Search for lines <n> of <queries>", async (range, queries) => {
   const [first, last] = range.split('-')
   const qs            = queries.split("\n").slice(first - 1, last).map(s => s.trim())
   for (const q of qs) {
-    await focus(textBox({ placeholder: 'type to search' }))
+    await focus(textBox($TEXT_BOX))
     await clear()
     await write(q, { delay: 1 })
     const match = {
@@ -69,23 +90,9 @@ step("Search for lines <n> of <queries>", async (range, queries) => {
                   }[q] || q
     q === 'checkbox' ? 'check' : q
     assert.ok(await text(match).exists())
-    const e = textBox({ placeholder: 'type to search' })
+    const e = textBox($TEXT_BOX)
     assert.equal(q, await e.value())
   }
-})
-
-step("Visit amp-what", async function () {
-  await goto('http://amp-what.com/')
-})
-
-step("Visit amp-what on a phone", async function () {
-  await setViewPort({ width: 600, height: 800 })
-  await goto('http://amp-what.com/')
-})
-
-
-step("Visit <arg0>", async function (path) {
-  await goto(`http://ampwhat.com${path}`)
 })
 
 step("I see the <content> symbol", async function (content) {
@@ -117,4 +124,12 @@ step("The URL is now <arg0>", async function (arg0) {
 step("The query box contains <arg0>", async function (arg0) {
   const e = textBox({ placeholder: 'type to search' })
   assert.equal(arg0, await e.value())
+})
+
+step('Click the symbol inside zoom', async () => {
+  click($(`#zoom samp`))
+})
+
+step('Click the number inside zoom', async () => {
+  click($(`#zoom span.num`))
 })

@@ -4,6 +4,7 @@ const {
         $,
         clear,
         click,
+        client,
         closeBrowser,
         currentURL,
         evaluate,
@@ -30,7 +31,8 @@ const $TEXT_BOX = { placeholder: 'type to search' }
 
 
 beforeSuite(async () => {
-  await openBrowser({ headless: headless })
+  await openBrowser({ headless: headless, args: ['--allow-no-sandbox-job'] })
+  // client().Browser.grantPermissions({ origin: 'https://www.amp-what.com', permissions: ['clipboardReadWrite', 'clipboardRead'] })
 })
 
 afterSuite(async () => {
@@ -132,4 +134,19 @@ step('Click the symbol inside zoom', async () => {
 
 step('Click the number inside zoom', async () => {
   click($(`#zoom span.num`))
+})
+
+step("The clipboard contains <text>", async function (expected) {
+  return
+  const text2 = await evaluate( () => navigator.clipboard)
+  const text = await evaluate(async () => await navigator.clipboard.readText())
+  console.log(
+    '*****',
+    text2,
+    text,
+    await text
+  )
+  // https://barrysimpson.net/posts/copy-paste-chrome-ext
+  // see https://gist.github.com/sirbarrence/f254a36119b8405999fd
+  assert.equal(expected, text)
 })

@@ -1,5 +1,5 @@
 /* globals gauge*/
-"use strict"
+'use strict'
 const {
         $,
         clear,
@@ -24,8 +24,10 @@ const {
         getConfig,
         setConfig,
       }        = require('taiko')
-const assert   = require("assert")
+const assert   = require('assert')
 const headless = process.env.headless_chrome.toLowerCase() === 'true'
+const HOST     = process.env.HOST || 'amp-what.com'
+const PROTOCOL = process.env.INSECURE ? 'http' : 'https'
 
 const $TEXT_BOX = { placeholder: 'type to search' }
 
@@ -39,30 +41,28 @@ afterSuite(async () => {
   await closeBrowser()
 })
 
-gauge.screenshotFn = async function () {
-  return await screenshot({ encoding: 'base64' })
-}
+gauge.screenshotFn = async () => await screenshot({ encoding: 'base64' })
 
-step("Visit amp-what", async function () {
-  await goto('https://amp-what.com/')
+step('Visit amp-what', async () => {
+  await goto(`${PROTOCOL}://${HOST}/`)
 })
 
-step("Visit amp-what on a phone", async function () {
+step('Visit amp-what on a phone', async () => {
   await setViewPort({ width: 600, height: 800 })
-  await goto('https://amp-what.com/')
+  await goto(`${PROTOCOL}://${HOST}/`)
 })
 
 
-step("Visit <arg0>", async function (path) {
-  await goto(`https://amp-what.com${path}`)
+step('Visit <arg0>', async path => {
+  await goto(`${PROTOCOL}://${HOST}${path}`)
 })
 
-step("Search for <query>", async (query) => {
+step('Search for <query>', async (query) => {
   await clear()
   await write(query)
 })
 
-step("Type <arg0> slowly", async function (q) {
+step('Type <arg0> slowly', async q => {
   await write(q, { delay: 300 })
 })
 
@@ -75,9 +75,9 @@ step('The page title has <word>', async word => {
 })
 
 
-step("Search for lines <n> of <queries>", async (range, queries) => {
+step('Search for lines <n> of <queries>', async (range, queries) => {
   const [first, last] = range.split('-')
-  const qs            = queries.split("\n").slice(first - 1, last).map(s => s.trim())
+  const qs            = queries.split('\n').slice(first - 1, last).map(s => s.trim())
   for (const q of qs) {
     await focus(textBox($TEXT_BOX))
     await clear()
@@ -97,33 +97,33 @@ step("Search for lines <n> of <queries>", async (range, queries) => {
   }
 })
 
-step("I see the <content> symbol", async function (content) {
+step('I see the <content> symbol', async (content) => {
   assert.ok(await text(content).exists())
 })
 
-step("I see the <content> character", async function (content) {
+step('I see the <content> character', async (content) => {
   assert.ok(await text(content).exists())
 })
 
-step("Page contains <content>", async (content) => {
+step('Page contains <content>', async (content) => {
   assert.ok(await text(content).exists())
 })
 
 
-step("Click link <arg0>", async function (text) {
+step('Click link <arg0>', async (text) => {
   await click(text)
 })
 
-step("I see the description <arg0>", async function (content) {
+step('I see the description <arg0>', async content => {
   assert.ok(await text(content).exists())
 })
 
-step("The URL is now <arg0>", async function (arg0) {
+step('The path is now <path>', async path => {
   const url = await currentURL()
-  assert.equal(arg0, url.replace('www.', ''))
+  assert.equal(`${PROTOCOL}://${HOST}${path}`, url)
 })
 
-step("The query box contains <arg0>", async function (arg0) {
+step('The query box contains <arg0>', async arg0 => {
   const e = textBox({ placeholder: 'type to search' })
   assert.equal(arg0, await e.value())
 })
@@ -136,15 +136,15 @@ step('Click the number inside zoom', async () => {
   click($(`#zoom span.num`))
 })
 
-step("The clipboard contains <text>", async function (expected) {
+step('The clipboard contains <text>', async expected => {
   return
-  const text2 = await evaluate( () => navigator.clipboard)
-  const text = await evaluate(async () => await navigator.clipboard.readText())
+  const text2 = await evaluate(() => navigator.clipboard)
+  const text  = await evaluate(async () => await navigator.clipboard.readText())
   console.log(
     '*****',
     text2,
     text,
-    await text
+    await text,
   )
   // https://barrysimpson.net/posts/copy-paste-chrome-ext
   // see https://gist.github.com/sirbarrence/f254a36119b8405999fd

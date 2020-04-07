@@ -24,7 +24,7 @@
 * I see the description "fullwidth quotation mark"
 
 * Click link "♕"
-* The URL is now "http://amp-what.com/unicode/search/chess"
+* The path is now "/unicode/search/chess"
 * I see the "rook" character 
 * I see the "bishop" character
 * I see the "&quest;" character

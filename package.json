@@ -4,7 +4,9 @@
   "license": "private",
   "description": "Acceptance Tests for amp-what.com, written in Gauge",
   "scripts": {
-    "test": "gauge run specs/"
+    "test": "gauge run specs/",
+    "test:staging": "HOST=amp-what-staging.herokuapp.com gauge run specs/",
+    "test:localhost": "HOST=localhost:5000 INSECURE=1 gauge run specs/"
   },
   "dependencies": {
     "taiko": "latest"

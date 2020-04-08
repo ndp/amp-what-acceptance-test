@@ -18,7 +18,7 @@
 ## Click on all the sample queries
 * Visit amp-what
 
-* Click link "quote"
+* Click link with title "quote"
 * I see the "&quot;" character
 * I see the "&apos;" character
 * I see the description "fullwidth quotation mark"
@@ -30,7 +30,7 @@
 * I see the "&quest;" character
 * The query box contains "chess"
 
-* Click link ">"
+* Click link with title "greater than"
 * I see the "greater-than sign" character
 * I see the "right-pointing double angle quotation mark" character
 
@@ -44,7 +44,7 @@
 * I see the "&frac23;" character
 * I see the "percent sign" character
 
-* Click link "weather"
+* Click link with title "weather"
 * I see the "snowman" character
 
 * Click link "▲"
@@ -54,12 +54,11 @@
 * I see the "square" character
 * I see the "◼" character
 
-* Click link "entities"
-* I see the "raquo" character
-* I see the "&amp;" character
+* Click link with title "person"
+* I see the "person" character
 
-* Click link "heart"
-* I see the "heart" character
+* Click link with title "computer"
+* I see the "computer" character
 
 
 ## Visit a search results page directly
@@ -102,7 +101,7 @@
 * I see the "ligature" character
 
 * Click link "Help"
-* Click link "ligature latin"
+* Click link "latin ligature"
 * I see the "latin small ligature" character
 
 ## Search for a really long string
@@ -110,13 +109,13 @@
 * Type "right-pointing double angle quotation mark" slowly
 * I see the "right-pointing double angle quotation mark" character
 
-Use the music help page
-Visit amp-what
-Click link "Help"
-Click link "♫"
-I see the "beamed sixteenth notes" character
+## Use the music help page
+* Visit amp-what
+* Click link "Help"
+* Click link "♫"
+* I see the "beamed sixteenth notes" character
 
-Click link "Helpxxx"
-Click link "/note|music/ (♫)"
-I see the "beamed sixteenth notes" character
+* Click link "Help"
+* Click link "/note|music/ (♫)"
+* I see the "beamed sixteenth notes" character
 

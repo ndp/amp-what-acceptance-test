@@ -10,6 +10,7 @@ const {
         evaluate,
         focus,
         goto,
+        link,
         openBrowser,
         overridePermissions,
         paste,
@@ -37,15 +38,11 @@ beforeSuite(async () => {
   // client().Browser.grantPermissions({ origin: 'https://www.amp-what.com', permissions: ['clipboardReadWrite', 'clipboardRead'] })
 })
 
-afterSuite(async () => {
-  await closeBrowser()
-})
+afterSuite(async () => await closeBrowser())
 
 gauge.screenshotFn = async () => await screenshot({ encoding: 'base64' })
 
-step('Visit amp-what', async () => {
-  await goto(`${PROTOCOL}://${HOST}/`)
-})
+step('Visit amp-what', async () => await goto(`${PROTOCOL}://${HOST}/`))
 
 step('Visit amp-what on a phone', async () => {
   await setViewPort({ width: 600, height: 800 })
@@ -53,26 +50,18 @@ step('Visit amp-what on a phone', async () => {
 })
 
 
-step('Visit <arg0>', async path => {
-  await goto(`${PROTOCOL}://${HOST}${path}`)
-})
+step('Visit <arg0>', async path => await goto(`${PROTOCOL}://${HOST}${path}`))
 
-step('Search for <query>', async (query) => {
+step('Search for <query>', async query => {
   await clear()
   await write(query)
 })
 
-step('Type <arg0> slowly', async q => {
-  await write(q, { delay: 300 })
-})
+step('Type <arg0> slowly', async q => await write(q, { delay: 300 }))
 
-step('The page title is <expectedTitle>', async expectedTitle => {
-  assert.equal(expectedTitle, await title())
-})
+step('The page title is <expectedTitle>', async expectedTitle => assert.equal(expectedTitle, await title()))
 
-step('The page title has <word>', async word => {
-  assert.equal(`&what search "${word}" Unicode characters & entities`, await title())
-})
+step('The page title has <word>', async word => assert.equal(`&what search "${word}" Unicode characters & entities`, await title()))
 
 
 step('Search for lines <n> of <queries>', async (range, queries) => {
@@ -97,26 +86,17 @@ step('Search for lines <n> of <queries>', async (range, queries) => {
   }
 })
 
-step('I see the <content> symbol', async (content) => {
-  assert.ok(await text(content).exists())
-})
+step('I see the <content> symbol', async content => assert.ok(await text(content).exists()))
 
-step('I see the <content> character', async (content) => {
-  assert.ok(await text(content).exists())
-})
+step('I see the <content> character', async content => assert.ok(await text(content).exists()))
 
-step('Page contains <content>', async (content) => {
-  assert.ok(await text(content).exists())
-})
+step('Page contains <content>', async content => assert.ok(await text(content).exists()))
 
+step('Click link <arg0>', async text => await click(text))
 
-step('Click link <arg0>', async (text) => {
-  await click(text)
-})
+step('Click link with title <arg0>', async title => await click(link({ title })))
 
-step('I see the description <arg0>', async content => {
-  assert.ok(await text(content).exists())
-})
+step('I see the description <arg0>', async content => assert.ok(await text(content).exists()))
 
 step('The path is now <path>', async path => {
   const url = await currentURL()
@@ -128,13 +108,9 @@ step('The query box contains <arg0>', async arg0 => {
   assert.equal(arg0, await e.value())
 })
 
-step('Click the symbol inside zoom', async () => {
-  click($(`#zoom samp`))
-})
+step('Click the symbol inside zoom', async () => click($(`#zoom samp`)))
 
-step('Click the number inside zoom', async () => {
-  click($(`#zoom span.num`))
-})
+step('Click the number inside zoom', async () => click($(`#zoom span.num`)))
 
 step('The clipboard contains <text>', async expected => {
   return

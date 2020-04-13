@@ -9,7 +9,7 @@
 * I see the "$" symbol
 * I see the "💶" symbol
 * I see the "🤑" symbol
-* Click link "🤑"
+* Click the "🤑" character
 * Page contains "money-mouth face"
 * Click link "supplemental symbols and pictographs"
 * Page contains "🤀"

@@ -11,19 +11,19 @@ const {
         focus,
         goto,
         link,
+        listItem,
         openBrowser,
         overridePermissions,
         paste,
         press,
         screenshot,
         setViewPort,
+        tap,
         text,
         textBox,
         title,
         toRightOf,
         write,
-        getConfig,
-        setConfig,
       }        = require('taiko')
 const assert   = require('assert')
 const headless = process.env.headless_chrome.toLowerCase() === 'true'
@@ -93,6 +93,10 @@ step('I see the <content> character', async content => assert.ok(await text(cont
 step('Page contains <content>', async content => assert.ok(await text(content).exists()))
 
 step('Click link <arg0>', async text => await click(text))
+
+step('Click number <arg0>', tap)
+step('Click the <arg0> character', tap)
+step('Click the <arg0> symbol', tap)
 
 step('Click link with title <arg0>', async title => await click(link({ title })))
 

@@ -10,7 +10,7 @@
 * I see the "$" symbol
 * I see the "euro" symbol     
 * I see the "money-mouth face" symbol
-* Click link "money-mouth face"
+* Click the "money-mouth face" symbol
 * Click link "supplemental symbols and pictographs"
 * Page contains "circled cross formee four dots"
 * Page contains "nazar amulet"

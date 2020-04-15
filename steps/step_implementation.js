@@ -96,6 +96,7 @@ step('Click link <arg0>', async text => await click(text))
 step('Click number <arg0>', tap)
 step('Click the <arg0> character', tap)
 step('Click the <arg0> symbol', tap)
+step('Click the <arg0> message', tap)
 
 step('Click link with title <arg0>', async title => await click(link({ title })))
 

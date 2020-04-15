@@ -13,6 +13,8 @@
 * Click the "money-mouth face" symbol
 * Click link "supplemental symbols and pictographs"
 * Page contains "circled cross formee four dots"
+* Page contains "brown heart"
+* Click the "Click to show more than 250." message
 * Page contains "nazar amulet"
 
 ## A fairly thorough coverage of the sample queries
@@ -122,9 +124,10 @@
 * Visit amp-what
 * Search for "medium-light skin tone"
 * I see the "person bouncing ball" symbol
-* I see the "man elf" symbol
+* I see the "man gesturing ok" symbol
 * I see the "mx claus" symbol
 * Search for "flag"
+* Click the "Click to show more than 250." message
 * I see the "pirate flag" symbol
 * I see the "rainbow flag" symbol
 * I see the "white flag" symbol

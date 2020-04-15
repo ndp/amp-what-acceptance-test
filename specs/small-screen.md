@@ -13,5 +13,6 @@
 * Page contains "money-mouth face"
 * Click link "supplemental symbols and pictographs"
 * Page contains "🤀"
-* Page contains "🧿"
+* Page contains "🤎"
+* Page contains "🧶"
 

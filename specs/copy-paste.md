@@ -1,6 +1,6 @@
-# Amp-What
+# Amp-What copy functionality
 
-## Copy and pasting
+## Copy symbol and number
 
 * Visit amp-what
 * Search for "zombie"

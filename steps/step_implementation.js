@@ -49,7 +49,6 @@ step('Visit amp-what on a phone', async () => {
   await goto(`${PROTOCOL}://${HOST}/`)
 })
 
-
 step('Visit <arg0>', async path => await goto(`${PROTOCOL}://${HOST}${path}`))
 
 step('Search for <query>', async query => {
@@ -78,8 +77,8 @@ step('Search for lines <n> of <queries>', async (range, queries) => {
                     'emoticon':     'kissing face',
                     'home':         'house garden',
                     'search':       'magnifying glass',
+                    'weather':      'umbrella',
                   }[q] || q
-    q === 'checkbox' ? 'check' : q
     assert.ok(await text(match).exists())
     const e = textBox($TEXT_BOX)
     assert.equal(q, await e.value())

@@ -1,6 +1,6 @@
-# Amp-What
+# Amp-What basic coverage
 
-## A first visit to Amp-What
+## A typical first visit to Amp-What
 
 * Visit amp-what
 * The page title is "&what: Discover Unicode & HTML Character Entities"
@@ -15,7 +15,7 @@
 * Page contains "circled cross formee four dots"
 * Page contains "nazar amulet"
 
-## Click on all the sample queries
+## A fairly thorough coverage of the sample queries
 * Visit amp-what
 
 * Click link with title "quote"
@@ -68,7 +68,7 @@
 * I see the "💶" character
 
 
-## Use the help page
+## Using the links on the help page
 * Visit amp-what
 * Click link "Help"
 * Click link "hiragana"
@@ -104,13 +104,6 @@
 * Click link "latin ligature"
 * I see the "latin small ligature" character
 
-## Search for a really long string
-* Visit amp-what
-* Type "right-pointing double angle quotation mark" slowly
-* I see the "right-pointing double angle quotation mark" character
-
-## Use the music help page
-* Visit amp-what
 * Click link "Help"
 * Click link "♫"
 * I see the "beamed sixteenth notes" character
@@ -119,3 +112,30 @@
 * Click link "/note|music/ (♫)"
 * I see the "beamed sixteenth notes" character
 
+## Searching for a really long string
+* Visit amp-what
+* Type "right-pointing double angle quotation mark" slowly
+* I see the "right-pointing double angle quotation mark" character
+
+## Look for unicode sequences
+
+* Visit amp-what
+* Search for "medium-light skin tone"
+* I see the "person bouncing ball" symbol
+* I see the "man elf" symbol
+* I see the "mx claus" symbol
+* Search for "flag"
+* I see the "pirate flag" symbol
+* I see the "rainbow flag" symbol
+* I see the "white flag" symbol
+* I see the "&#127462;&#127466;" symbol
+* I see the "crossed flag" symbol
+* I see the "pirate flag" symbol
+* I see the "rainbow flag" symbol
+* Click number "&#127462;&#127466;"
+* Page contains "United Arab Emirates"
+
+* Visit amp-what
+* Search for "&#127462;&#127466;"
+* Click number "&#127462;&#127466;"
+* Page contains "United Arab Emirates"

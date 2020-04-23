@@ -9,6 +9,6 @@
     "test:localhost": "HOST=localhost:5000 INSECURE=1 gauge run specs/*.md"
   },
   "dependencies": {
-    "taiko": "latest"
+    "taiko": "^1.0.7"
   }
 }

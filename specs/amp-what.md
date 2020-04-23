@@ -142,3 +142,32 @@
 * Search for "&#127462;&#127466;"
 * Click number "&#127462;&#127466;"
 * Page contains "United Arab Emirates"
+
+## Try forward and back
+
+* Visit amp-what
+* Search for "esperanto"
+* I see the "ŭ" symbol
+* The path is now "/unicode/search/esperanto"
+* Search for "EMOJI"
+* I see the "😈" symbol
+* The path is now "/unicode/search/EMOJI"
+* Click the BACK button
+* Click the BACK button
+* I see the "ŭ" symbol
+* The path is now "/unicode/search/esperanto"
+* Click the FORWARD button
+* Click the FORWARD button
+* I see the "😈" symbol
+* The path is now "/unicode/search/EMOJI"
+
+## Load More
+
+* Visit amp-what
+* Search for "EMOJI"
+* Click link "Load 53,952 characters"
+* Page contains "53952 Unicode characters loaded"
+* Search for "esperanto"
+* I see the "Ĉ" symbol
+* I see the "ĉ" symbol
+* I see the "ŭ" symbol

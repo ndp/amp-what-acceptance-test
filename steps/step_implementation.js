@@ -10,6 +10,8 @@ const {
         evaluate,
         focus,
         goto,
+        goBack,
+        goForward,
         link,
         listItem,
         openBrowser,
@@ -52,6 +54,7 @@ step('Visit amp-what on a phone', async () => {
 step('Visit <arg0>', async path => await goto(`${PROTOCOL}://${HOST}${path}`))
 
 step('Search for <query>', async query => {
+  await focus(textBox($TEXT_BOX))
   await clear()
   await write(query)
 })
@@ -130,3 +133,10 @@ step('The clipboard contains <text>', async expected => {
   // see https://gist.github.com/sirbarrence/f254a36119b8405999fd
   assert.equal(expected, text)
 })
+
+step("Click the BACK button", async function() {
+  await goBack({waitForNavigation: true})
+});
+step("Click the FORWARD button", async function() {
+  await goForward({waitForNavigation: true})
+});

@@ -7,6 +7,7 @@ const {
         client,
         closeBrowser,
         currentURL,
+        emulateDevice,
         evaluate,
         focus,
         goto,
@@ -20,46 +21,45 @@ const {
         press,
         screenshot,
         setViewPort,
+        setConfig,
         tap,
         text,
         textBox,
         title,
         toRightOf,
+        waitFor,
         write,
-      }        = require('taiko')
-const assert   = require('assert')
+      } = require('taiko')
+const assert = require('assert')
 const headless = process.env.headless_chrome.toLowerCase() === 'true'
-const HOST     = process.env.HOST || 'amp-what.com'
+const HOST = process.env.HOST || 'amp-what.com'
 const PROTOCOL = process.env.INSECURE ? 'http' : 'https'
 
 const $TEXT_BOX = { placeholder: 'type to search' }
 
 
 beforeSuite(async () => {
+  // setConfig({retryInterval: 5, waitForNavigation: false})
   await openBrowser({ headless: headless, args: ['--allow-no-sandbox-job'] })
-  // client().Browser.grantPermissions({ origin: 'https://www.amp-what.com', permissions: ['clipboardReadWrite', 'clipboardRead'] })
 })
 
 afterSuite(async () => await closeBrowser())
 
+step('Emulate <device>', emulateDevice)
+
 gauge.screenshotFn = async () => await screenshot({ encoding: 'base64' })
 
 step('Visit amp-what', async () => await goto(`${PROTOCOL}://${HOST}/`))
-
-step('Visit amp-what on a phone', async () => {
-  await setViewPort({ width: 600, height: 800 })
-  await goto(`${PROTOCOL}://${HOST}/`)
-})
 
 step('Visit <arg0>', async path => await goto(`${PROTOCOL}://${HOST}${path}`))
 
 step('Search for <query>', async query => {
   await focus(textBox($TEXT_BOX))
   await clear()
-  await write(query)
+  await write(query, { delay: 1 })
 })
 
-step('Type <arg0> slowly', async q => await write(q, { delay: 300 }))
+step('Type <arg0> slowly', async q => await write(q, { delay: 200 }))
 
 step('The page title is <expectedTitle>', async expectedTitle => assert.equal(expectedTitle, await title()))
 
@@ -68,20 +68,20 @@ step('The page title has <word>', async word => assert.equal(`&what search "${wo
 
 step('Search for lines <n> of <queries>', async (range, queries) => {
   const [first, last] = range.split('-')
-  const qs            = queries.split('\n').slice(first - 1, last).map(s => s.trim())
+  const qs = queries.split('\n').slice(first - 1, last).map(s => s.trim())
   for (const q of qs) {
     await focus(textBox($TEXT_BOX))
     await clear()
     await write(q, { delay: 1 })
     const match = {
-                    '/&\\w/':       '&sol',
-                    '/note|music/': 'musical symbol coda',
-                    'checkbox':     'check',
-                    'emoticon':     'kissing face',
-                    'home':         'house garden',
-                    'search':       'magnifying glass',
-                    'weather':      'umbrella',
-                  }[q] || q
+      '/&\\w/':       '&sol',
+      '/note|music/': 'musical symbol coda',
+      'checkbox':     'check',
+      'emoticon':     'kissing face',
+      'home':         'house garden',
+      'search':       'magnifying glass',
+      'weather':      'umbrella',
+    }[q] || q
     assert.ok(await text(match).exists())
     const e = textBox($TEXT_BOX)
     assert.equal(q, await e.value())
@@ -106,8 +106,13 @@ step('Click link with title <arg0>', async title => await click(link({ title }))
 step('I see the description <arg0>', async content => assert.ok(await text(content).exists()))
 
 step('The path is now <path>', async path => {
-  const url = await currentURL()
-  assert.equal(`${PROTOCOL}://${HOST}${path}`, url)
+  const expectedUrl = `${PROTOCOL}://${HOST}${path}`
+
+  if ((await currentURL()) === expectedUrl) return
+
+  // the URL update is debounced
+  await waitFor(1000)
+  assert.equal(expectedUrl, await currentURL())
 })
 
 step('The query box contains <arg0>', async arg0 => {
@@ -122,7 +127,7 @@ step('Click the number inside zoom', async () => click($(`#zoom span.num`)))
 step('The clipboard contains <text>', async expected => {
   return
   const text2 = await evaluate(() => navigator.clipboard)
-  const text  = await evaluate(async () => await navigator.clipboard.readText())
+  const text = await evaluate(async () => await navigator.clipboard.readText())
   console.log(
     '*****',
     text2,
@@ -134,9 +139,9 @@ step('The clipboard contains <text>', async expected => {
   assert.equal(expected, text)
 })
 
-step("Click the BACK button", async function() {
-  await goBack({waitForNavigation: true})
+step("Click the BACK button", async function () {
+  await goBack({ waitForNavigation: true })
 });
-step("Click the FORWARD button", async function() {
-  await goForward({waitForNavigation: true})
+step("Click the FORWARD button", async function () {
+  await goForward({ waitForNavigation: true })
 });

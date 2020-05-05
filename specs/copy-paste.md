@@ -1,4 +1,4 @@
-# Amp-What copy functionality
+# Copy functionality
 
 ## Copy symbol and number
 

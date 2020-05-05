@@ -1,6 +1,6 @@
-# Amp-What basic coverage
+# Basic usage
 
-## A typical first visit to Amp-What
+## A typical first visit
 
 * Visit amp-what
 * The page title is "&what: Discover Unicode & HTML Character Entities"
@@ -17,7 +17,16 @@
 * Click the "Click to show more than 250." message
 * Page contains "nazar amulet"
 
-## A fairly thorough coverage of the sample queries
+## Explore the "About" page
+* Visit amp-what
+* The page title is "&what: Discover Unicode & HTML Character Entities"
+* Page contains "Andrew J. Peterson. All Rights Reserved"
+* Click link "About Amp What"
+* Page contains "HTML character entities and common Unicode characters"
+* Page contains "Latest Unicode.org international character reference"
+* Page contains "W3"
+
+## Trying out the the sample queries
 * Visit amp-what
 
 * Click link with title "quote"
@@ -63,56 +72,12 @@
 * I see the "computer" character
 
 
-## Visit a search results page directly
+## Visiting a search results page from an external link
 * Visit "/unicode/search/currency"
 * I see the "$" character
 * I see the "₤" character
 * I see the "💶" character
 
-
-## Using the links on the help page
-* Visit amp-what
-* Click link "Help"
-* Click link "hiragana"
-* I see the "hiragana" character
-
-* Click link "Help"
-* Click link "raqu"
-* I see the "&raquo;" character
-
-* Click link "Help"
-* Click link "2665"
-* I see the "2665" character
-
-* Click link "Help"
-* Click link "icon"
-* I see the "icon" character
-
-* Click link "Help"
-* Click link "weather"
-* I see the "umbrella" character
-* I see the "thermometer" character
-* I see the "black sun rays" character
-
-* Click link "Help"
-* Click link "pig"
-* I see the "pig" character
-
-* Click link "Help"
-* Click link "ligature"
-* I see the "ligature" character
-
-* Click link "Help"
-* Click link "latin ligature"
-* I see the "latin small ligature" character
-
-* Click link "Help"
-* Click link "♫"
-* I see the "beamed sixteenth notes" character
-
-* Click link "Help"
-* Click link "/note|music/ (♫)"
-* I see the "beamed sixteenth notes" character
 
 ## Searching for a really long string
 * Visit amp-what
@@ -164,9 +129,12 @@
 ## Load More
 
 * Visit amp-what
-* Search for "EMOJI"
+* Search for "bracket"
+* I see the "tortoise shell bracketed latin capital letter s" symbol
 * Click link "Load 53,952 characters"
 * Page contains "53952 Unicode characters loaded"
+* I see the "tortoise shell bracketed latin capital letter s" symbol
+* I see the "tortoise shell bracketed cjk unified ideograph-6557" symbol
 * Search for "esperanto"
 * I see the "Ĉ" symbol
 * I see the "ĉ" symbol

@@ -1,10 +1,11 @@
-# Amp-what Common Usage
+# Most popular queries
 
 ## Visit the 50 most common queries
 
 I extracted the thousand most common queries (from GA) and this can
 run through them.
 
+* Emulate "iPad Pro"
 * Visit amp-what
 * Search for lines "1-4" of <file:specs/1000.csv>
 * Search for lines "5-8" of <file:specs/1000.csv>

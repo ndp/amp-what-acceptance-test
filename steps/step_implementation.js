@@ -120,9 +120,9 @@ step('The query box contains <arg0>', async arg0 => {
   assert.equal(arg0, await e.value())
 })
 
-step('Click the symbol inside zoom', async () => click($(`#zoom samp`)))
+step('Click the symbol inside zoom', async () => click($(`#modal samp`)))
 
-step('Click the number inside zoom', async () => click($(`#zoom span.num`)))
+step('Click the number inside zoom', async () => click($(`#modal span.num`)))
 
 step('The clipboard contains <text>', async expected => {
   return

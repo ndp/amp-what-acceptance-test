@@ -3,7 +3,7 @@
 ## A typical first visit
 
 * Visit amp-what
-* The page title is "&what: Discover Unicode & HTML Character Entities"
+* The page title is the generic page title
 * Page contains "Andrew J. Peterson. All Rights Reserved"
 * Search for "money"
 * The page title has "money"
@@ -19,7 +19,7 @@
 
 ## Explore the "About" page
 * Visit amp-what
-* The page title is "&what: Discover Unicode & HTML Character Entities"
+* The page title is the generic page title
 * Page contains "Andrew J. Peterson. All Rights Reserved"
 * Click link "About Amp What"
 * Page contains "HTML character entities and common Unicode characters"

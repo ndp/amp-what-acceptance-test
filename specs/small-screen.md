@@ -5,7 +5,7 @@
 
 * Emulate "iPhone 6"
 * Visit amp-what
-* The page title is "&what: Discover Unicode & HTML Character Entities"
+* The page title is the generic page title
 * Page contains "Andrew J. Peterson. All Rights Reserved"
 * Search for "money"
 * The page title has "money"
@@ -23,7 +23,7 @@
 
 * Emulate "iPhone X landscape"
 * Visit amp-what
-* The page title is "&what: Discover Unicode & HTML Character Entities"
+* The page title is the generic page title
 * Page contains "Andrew J. Peterson. All Rights Reserved"
 * Search for "money"
 * The page title has "money"

@@ -31,6 +31,8 @@ const {
         write,
       } = require('taiko')
 const assert = require('assert')
+const path = require('path')
+
 const headless = process.env.headless_chrome.toLowerCase() === 'true'
 const HOST = process.env.HOST || 'amp-what.com'
 const PROTOCOL = process.env.INSECURE ? 'http' : 'https'
@@ -46,8 +48,6 @@ beforeSuite(async () => {
 afterSuite(async () => await closeBrowser())
 
 step('Emulate <device>', emulateDevice)
-
-gauge.screenshotFn = async () => await screenshot({ encoding: 'base64' })
 
 step('Visit amp-what', async () => await goto(`${PROTOCOL}://${HOST}/`))
 

@@ -1,6 +1,6 @@
 {
   "name": "amp-what-acceptance-test",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "private",
   "description": "Acceptance Tests for amp-what.com, written in Gauge",
   "scripts": {
@@ -9,6 +9,6 @@
     "test:localhost": "HOST=localhost:5000 INSECURE=1 gauge run specs/*.md"
   },
   "dependencies": {
-    "taiko": "^1.0.7"
+    "taiko": "latest"
   }
 }

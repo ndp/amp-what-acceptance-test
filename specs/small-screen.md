@@ -6,7 +6,8 @@
 * Emulate "iPhone 6"
 * Visit amp-what
 * The page title is the generic page title
-* Page contains "Andrew J. Peterson. All Rights Reserved"
+* Page contains "Andrew J. Peterson."
+* Page contains "All Rights Reserved"
 * Search for "money"
 * The page title has "money"
 * I see the "$" symbol
@@ -24,7 +25,8 @@
 * Emulate "iPhone X landscape"
 * Visit amp-what
 * The page title is the generic page title
-* Page contains "Andrew J. Peterson. All Rights Reserved"
+* Page contains "Andrew J. Peterson."
+* Page contains "All Rights Reserved"
 * Search for "money"
 * The page title has "money"
 * I see the "$" symbol

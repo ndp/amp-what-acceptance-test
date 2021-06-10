@@ -4,14 +4,14 @@
 
 * Visit amp-what
 * Search for "zombie"
-* Click the "zombie" character
+* Click the "&#129503;" character
 * Click the symbol inside zoom
 * Page contains "🧟 copied"
 * The clipboard contains "🧟"
 
 * Visit amp-what
 * Search for "zombie"
-* Click the "zombie" character
+* Click the "&#129503;" character
 * Click the number inside zoom
 * Page contains "copied"
 * The clipboard contains "&#129503;"

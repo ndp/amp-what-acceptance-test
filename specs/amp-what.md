@@ -18,16 +18,6 @@
 * Click the "Click to show more than 250." message
 * Page contains "nazar amulet"
 
-## Explore the "About" page
-* Visit amp-what
-* The page title is the generic page title
-* Page contains "Andrew J. Peterson."
-* Page contains "All Rights Reserved"
-* Click link "About Amp What"
-* Page contains "HTML character entities and common Unicode characters"
-* Page contains "Latest Unicode.org international character reference"
-* Page contains "W3"
-
 ## Trying out the the sample queries
 * Visit amp-what
 
@@ -91,7 +81,7 @@
 * Visit amp-what
 * Search for "medium-light skin tone"
 * I see the "person bouncing ball" symbol
-* I see the "man gesturing ok" symbol
+* I see the "person gesturing ok" symbol
 * I see the "mx claus" symbol
 * Search for "flag"
 * Click the "Click to show more than 250." message
@@ -133,8 +123,8 @@
 * Visit amp-what
 * Search for "bracket"
 * I see the "tortoise shell bracketed latin capital letter s" symbol
-* Click link "Load 53,952 characters"
-* Page contains "53952 Unicode characters loaded"
+* Click link "Load 54,174 characters"
+* Page contains "54174 Unicode characters loaded"
 * I see the "tortoise shell bracketed latin capital letter s" symbol
 * I see the "tortoise shell bracketed cjk unified ideograph-6557" symbol
 * Search for "esperanto"

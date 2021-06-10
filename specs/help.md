@@ -40,10 +40,6 @@
 * Click link "♫"
 * I see the "beamed sixteenth notes" character
 
-* Click link "Help"
-* Click link "/note|music/ (♫)"
-* I see the "beamed sixteenth notes" character
-
 ## Using the help page
 * Visit "/help.html"
 * Click link "hiragana"

@@ -35,6 +35,7 @@ const {
       } = require('taiko')
 const assert = require('assert')
 const path = require('path')
+const expectedMatches = require ('../specs/expected-matches.json');
 
 const headless = process.env.headless_chrome.toLowerCase() === 'true'
 const HOST = process.env.HOST || 'amp-what.com'
@@ -81,53 +82,7 @@ step('Search for lines <n> of <queries>', async (range, queries) => {
     await write(q, into(textBox($TEXT_BOX)))
     assert.equal(q, await textBox($TEXT_BOX).value())
 
-    const match = {
-      '/&\\w/':         '&sol',
-      '/note|music/':   'musical symbol coda',
-      '>>':             'raquo',
-      'arr':            'squat black rightwards arrow',
-      'arrow':          'squat black rightwards arrow',
-      'arrow down':     'down-right arrow',
-      'box':            'open box',
-      'bracket':        'fullwidth left square bracket',
-      'checkbox':       'check',
-      'check':          'ballot box check',
-      'chess':          'chess pawn',
-      'circle':         'double circled digit eight',
-      'cross':          'latin cross',
-      'currency':       'banknote euro sign',
-      'dash':           'swung dash',
-      'degree':         'degree sign',
-      'diamond':        'ring',
-      'dot':            'middle dot',
-      'down':           'down arrowhead',
-      'down arro':      'downwards arrow',
-      'emoticon':       'kissing face',
-      'emoji':          'kissing face',
-      'esperanto':      'latin small letter j circumflex',
-      'french':         'Ë',
-      'heart':          'two hearts',
-      'home':           'house garden',
-      'icon':           'fax icon',
-      'latin ligature': 'latin small ligature fi',
-      'left':           'left parenthesis',
-      'line':           'vertical line',
-      'money':          'money bag',
-      'music':          'sharp',
-      'peace':          'peace symbol',
-      'phone':          'mobile phone',
-      'plus':           'plus sign',
-      'quote':          'apostrophe',
-      'right':          'right parenthesis',
-      'search':         'right-pointing magnifying glass',
-      'square':         'square root',
-      'star':           'asterisk',
-      'tibet':          'tibetan syllable om',
-      'tick':           'apostrophe',
-      'triangle':       'upwards triangle arrowhead',
-      'up':             'upwards arrow',
-      'weather':        'umbrella',
-    }[q.toLowerCase()] || q
+    const match = expectedMatches[q.toLowerCase()] || q
     assert.ok(
       await text(match, { exactMatch: false }, within($('ul')))
         .exists(100, 9000),

@@ -6,6 +6,7 @@ const {
         click,
         client,
         closeBrowser,
+  css,
         currentURL,
         emulateDevice,
         evaluate,
@@ -13,6 +14,7 @@ const {
         goto,
         goBack,
         goForward,
+        into,
         link,
         listItem,
         openBrowser,
@@ -28,6 +30,7 @@ const {
         title,
         toRightOf,
         waitFor,
+        within,
         write,
       } = require('taiko')
 const assert = require('assert')
@@ -74,21 +77,61 @@ step('Search for lines <n> of <queries>', async (range, queries) => {
   const [first, last] = range.split('-')
   const qs = queries.split('\n').slice(first - 1, last).map(s => s.trim())
   for (const q of qs) {
-    await focus(textBox($TEXT_BOX))
-    await clear()
-    await write(q, { delay: 1 })
+    await clear(textBox($TEXT_BOX))
+    await write(q, into(textBox($TEXT_BOX)))
+    assert.equal(q, await textBox($TEXT_BOX).value())
+
     const match = {
-      '/&\\w/':       '&sol',
-      '/note|music/': 'musical symbol coda',
-      'checkbox':     'check',
-      'emoticon':     'kissing face',
-      'home':         'house garden',
-      'search':       'magnifying glass',
-      'weather':      'umbrella',
-    }[q] || q
-    assert.ok(await text(match).exists())
-    const e = textBox($TEXT_BOX)
-    assert.equal(q, await e.value())
+      '/&\\w/':         '&sol',
+      '/note|music/':   'musical symbol coda',
+      '>>':             'raquo',
+      'arr':            'squat black rightwards arrow',
+      'arrow':          'squat black rightwards arrow',
+      'arrow down':     'down-right arrow',
+      'box':            'open box',
+      'bracket':        'fullwidth left square bracket',
+      'checkbox':       'check',
+      'check':          'ballot box check',
+      'chess':          'chess pawn',
+      'circle':         'double circled digit eight',
+      'cross':          'latin cross',
+      'currency':       'banknote euro sign',
+      'dash':           'swung dash',
+      'degree':         'degree sign',
+      'diamond':        'ring',
+      'dot':            'middle dot',
+      'down':           'down arrowhead',
+      'down arro':      'downwards arrow',
+      'emoticon':       'kissing face',
+      'emoji':          'kissing face',
+      'esperanto':      'latin small letter j circumflex',
+      'french':         'Ë',
+      'heart':          'two hearts',
+      'home':           'house garden',
+      'icon':           'fax icon',
+      'latin ligature': 'latin small ligature fi',
+      'left':           'left parenthesis',
+      'line':           'vertical line',
+      'money':          'money bag',
+      'music':          'sharp',
+      'peace':          'peace symbol',
+      'phone':          'mobile phone',
+      'plus':           'plus sign',
+      'quote':          'apostrophe',
+      'right':          'right parenthesis',
+      'search':         'right-pointing magnifying glass',
+      'square':         'square root',
+      'star':           'asterisk',
+      'tibet':          'tibetan syllable om',
+      'tick':           'apostrophe',
+      'triangle':       'upwards triangle arrowhead',
+      'up':             'upwards arrow',
+      'weather':        'umbrella',
+    }[q.toLowerCase()] || q
+    assert.ok(
+      await text(match, { exactMatch: false }, within($('ul')))
+        .exists(100, 9000),
+      `Did not find '${match}' within search for '${q}'` )
   }
 })
 

@@ -131,3 +131,8 @@
 * I see the "Ĉ" symbol
 * I see the "ĉ" symbol
 * I see the "ŭ" symbol
+
+## A query with no results
+* Visit amp-what
+* Search for "yabba dabba doo"
+* Page contains "No matches."

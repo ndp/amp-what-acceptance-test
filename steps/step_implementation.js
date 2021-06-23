@@ -35,7 +35,7 @@ const {
       } = require('taiko')
 const assert = require('assert')
 const path = require('path')
-const expectedMatches = require ('../specs/expected-matches.json');
+const expectedMatches = require ('./expected-results.json');
 
 const headless = process.env.headless_chrome.toLowerCase() === 'true'
 const HOST = process.env.HOST || 'amp-what.com'

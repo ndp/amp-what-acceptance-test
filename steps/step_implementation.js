@@ -65,13 +65,13 @@ step('Search for <query>', async query => {
 
 step('Type <arg0> slowly', async q => await write(q, { delay: 200 }))
 
-step('The page title is <expectedTitle>', async expectedTitle => assert.equal(expectedTitle, await title()))
+step('The page title is <expectedTitle>', async expectedTitle => assert.strictEqual(expectedTitle, await title()))
 
 step('The page title is the generic page title', async () => {
-  assert.equal('Amp What: Discover Unicode & HTML Character Entities', await title())
+  assert.strictEqual('Discover Unicode & Character Entities | Amp What', await title())
 })
 
-step('The page title has <word>', async word => assert.equal(`Amp What search “${word}” Unicode Characters & Entities`, await title()))
+step('The page title has <word>', async word => assert.strictEqual(`“${word}” Unicode Characters & Entities Search | Amp What`, await title()))
 
 
 step('Search for lines <n> of <queries>', async (range, queries) => {
@@ -80,7 +80,22 @@ step('Search for lines <n> of <queries>', async (range, queries) => {
   for (const q of qs) {
     await clear(textBox($TEXT_BOX))
     await write(q, into(textBox($TEXT_BOX)))
-    assert.equal(q, await textBox($TEXT_BOX).value())
+    assert.strictEqual(q, await textBox($TEXT_BOX).value())
+
+    const match = expectedMatches[q.toLowerCase()] || q
+    assert.ok(
+      await text(match, { exactMatch: false }, within($('ul')))
+        .exists(100, 9000),
+      `Did not find '${match}' within search for '${q}'` )
+  }
+})
+
+step('Visit lines <n> of <queries>', async (range, queries) => {
+  const [first, last] = range.split('-')
+  const qs = queries.split('\n').slice(first - 1, last).map(s => s.trim())
+  for (const q of qs) {
+    goto(`${PROTOCOL}://${HOST}/unicode/search/${encodeURIComponent(q)}`)
+    assert.strictEqual(q, await textBox($TEXT_BOX).value())
 
     const match = expectedMatches[q.toLowerCase()] || q
     assert.ok(
@@ -114,12 +129,12 @@ step('The path is now <path>', async path => {
 
   // the URL update is debounced
   await waitFor(1000)
-  assert.equal(expectedUrl, await currentURL())
+  assert.strictEqual(expectedUrl, await currentURL())
 })
 
 step('The query box contains <arg0>', async arg0 => {
   const e = textBox({ placeholder: 'type to search' })
-  assert.equal(arg0, await e.value())
+  assert.strictEqual(arg0, await e.value())
 })
 
 step('Click the symbol inside zoom', async () => click($(`#modal samp`)))
@@ -138,7 +153,7 @@ step('The clipboard contains <text>', async expected => {
   )
   // https://barrysimpson.net/posts/copy-paste-chrome-ext
   // see https://gist.github.com/sirbarrence/f254a36119b8405999fd
-  assert.equal(expected, text)
+  assert.strictEqual(expected, text)
 })
 
 step("Click the BACK button", async function () {

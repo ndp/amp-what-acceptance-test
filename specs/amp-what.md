@@ -37,7 +37,7 @@
 * I see the "greater-than sign" character
 * I see the "right-pointing double angle quotation mark" character
 
-* Click link ">>"
+* Click link ">"
 * I see the "right-pointing double angle quotation mark" character
 
 * Click link "/"
@@ -59,6 +59,35 @@
 
 * Click link with title "person"
 * I see the "person" character
+
+* Click link with title "car"
+* I see the "tram" character
+* I see the "police car" character
+* I see the "automobile" character
+
+* Click link with title "face"
+* I see the "white frowning face" character
+* I see the "white smiling face" character
+
+* Click link with title "tick"
+* I see the "white heavy check mark" character
+* I see the "ticket" character
+* I see the "apostrophe" character
+
+* Click link with title "rock"
+* I see the "curling stone" character
+
+* Click link with title "paper"
+* I see the "wastebasket" character
+
+* Click link with title "scissors"
+* I see the "black scissors" character
+
+* Click link with title "danger"
+* I see the "high voltage sign" character
+
+* Click link with title "love"
+* I see the "two hearts" character
 
 * Click link with title "computer"
 * I see the "computer" character
@@ -123,8 +152,8 @@
 * Visit amp-what
 * Search for "bracket"
 * I see the "tortoise shell bracketed latin capital letter s" symbol
-* Click link "Load 54,174 characters"
-* Page contains "54174 Unicode characters loaded"
+* Click link "Load 54,249 characters"
+* Page contains "54249 Unicode characters loaded"
 * I see the "tortoise shell bracketed latin capital letter s" symbol
 * I see the "tortoise shell bracketed cjk unified ideograph-6557" symbol
 * Search for "esperanto"

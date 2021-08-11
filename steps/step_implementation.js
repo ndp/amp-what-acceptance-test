@@ -95,7 +95,7 @@ step('Visit lines <n> of <queries>', async (range, queries) => {
   const qs = queries.split('\n').slice(first - 1, last).map(s => s.trim())
   for (const q of qs) {
     goto(`${PROTOCOL}://${HOST}/unicode/search/${encodeURIComponent(q)}`)
-    assert.strictEqual(q, await textBox($TEXT_BOX).value())
+    assert.strictEqual(await textBox($TEXT_BOX).value(), q.toLowerCase())
 
     const match = expectedMatches[q.toLowerCase()] || q
     assert.ok(

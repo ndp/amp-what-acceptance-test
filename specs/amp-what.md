@@ -137,7 +137,7 @@
 * The path is now "/unicode/search/esperanto"
 * Search for "EMOJI"
 * I see the "😈" symbol
-* The path is now "/unicode/search/EMOJI"
+* The path is now "/unicode/search/emoji"
 * Click the BACK button
 * Click the BACK button
 * I see the "ŭ" symbol
@@ -145,7 +145,7 @@
 * Click the FORWARD button
 * Click the FORWARD button
 * I see the "😈" symbol
-* The path is now "/unicode/search/EMOJI"
+* The path is now "/unicode/search/emoji"
 
 ## Load More
 
@@ -164,4 +164,7 @@
 ## A query with no results
 * Visit amp-what
 * Search for "yabba dabba doo"
+* Page contains "No matches."
+* Visit amp-what
+* Search for "(not set)"
 * Page contains "No matches."

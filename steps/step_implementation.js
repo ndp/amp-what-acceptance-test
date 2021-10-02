@@ -14,6 +14,7 @@ const {
         goto,
         goBack,
         goForward,
+        hover,
         into,
         link,
         listItem,
@@ -95,7 +96,7 @@ step('Visit lines <n> of <queries>', async (range, queries) => {
   const qs = queries.split('\n').slice(first - 1, last).map(s => s.trim())
   for (const q of qs) {
     goto(`${PROTOCOL}://${HOST}/unicode/search/${encodeURIComponent(q)}`)
-    assert.strictEqual(await textBox($TEXT_BOX).value(), q.toLowerCase())
+    assert.strictEqual(await textBox($TEXT_BOX).value().replace('\\\\','\\'), q.toLowerCase())
 
     const match = expectedMatches[q.toLowerCase()] || q
     assert.ok(
@@ -114,9 +115,19 @@ step('Page contains <content>', async content => assert.ok(await text(content).e
 step('Click link <arg0>', async text => await click(text))
 
 step('Click number <arg0>', tap)
-step('Click the <arg0> character', tap)
-step('Click the <arg0> symbol', tap)
+step('Click the <arg0> character', async (char) => {
+  await click(char)
+  await press(' ')
+} )
+step('Click the <arg0> symbol', async (char) => {
+  await click(char)
+  await press(' ')
+} )
 step('Click the <arg0> message', tap)
+
+step("Type the <arg0> key", async function(key) {
+  await press(key)
+});
 
 step('Click link with title <arg0>', async title => await click(link({ title })))
 

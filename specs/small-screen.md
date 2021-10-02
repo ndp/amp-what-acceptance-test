@@ -1,4 +1,4 @@
-# On a phone
+# Small screen
 
 
 ## Visit Amp-What on a small screen

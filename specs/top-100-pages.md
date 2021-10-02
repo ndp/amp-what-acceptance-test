@@ -1,4 +1,4 @@
-# Most popular queries
+# Most popular pages
 
 I extracted the thousand most common queries (from GA) and this can
 run through them.

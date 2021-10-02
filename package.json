@@ -1,6 +1,6 @@
 {
   "name": "amp-what-acceptance-test",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "UNLICENSED",
   "description": "Acceptance Tests for amp-what.com, written in Gauge",
   "scripts": {
@@ -8,7 +8,10 @@
     "test:staging": "HOST=amp-what-staging.herokuapp.com gauge run specs/*.md",
     "test:localhost": "HOST=localhost:5000 INSECURE=1 gauge run specs/*.md"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "@getgauge/cli": "*",
+    "gauge": "*",
     "taiko": "*"
   }
 }

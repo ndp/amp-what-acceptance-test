@@ -153,7 +153,7 @@
 * Search for "bracket"
 * I see the "tortoise shell bracketed latin capital letter s" symbol
 * Click link "Load 54,249 characters"
-* Page contains "54249 Unicode characters loaded"
+* Page contains "55097 Unicode characters loaded"
 * I see the "tortoise shell bracketed latin capital letter s" symbol
 * I see the "tortoise shell bracketed cjk unified ideograph-6557" symbol
 * Search for "esperanto"

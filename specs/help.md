@@ -38,6 +38,8 @@
 
 * Click link "Help"
 * Click link "♫"
+* I see the "quarter note" character
+* I see the "music flat sign" character
 * I see the "beamed sixteenth notes" character
 
 ## Using the help page

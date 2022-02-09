@@ -2,11 +2,12 @@
 'use strict'
 const {
         $,
+        below,
         clear,
         click,
         client,
         closeBrowser,
-  css,
+        css,
         currentURL,
         emulateDevice,
         evaluate,
@@ -23,6 +24,7 @@ const {
         paste,
         press,
         screenshot,
+        scrollDown,
         setViewPort,
         setConfig,
         tap,
@@ -36,7 +38,7 @@ const {
       } = require('taiko')
 const assert = require('assert')
 const path = require('path')
-const expectedMatches = require ('./expected-results.json');
+const expectedMatches = require('./expected-results.json');
 
 const headless = process.env.headless_chrome.toLowerCase() === 'true'
 const HOST = process.env.HOST || 'amp-what.com'
@@ -87,7 +89,7 @@ step('Search for lines <n> of <queries>', async (range, queries) => {
     assert.ok(
       await text(match, { exactMatch: false }, within($('ul')))
         .exists(100, 9000),
-      `Did not find '${match}' within search for '${q}'` )
+      `Did not find '${match}' within search for '${q}'`)
   }
 })
 
@@ -96,13 +98,13 @@ step('Visit lines <n> of <queries>', async (range, queries) => {
   const qs = queries.split('\n').slice(first - 1, last).map(s => s.trim())
   for (const q of qs) {
     goto(`${PROTOCOL}://${HOST}/unicode/search/${encodeURIComponent(q)}`)
-    assert.strictEqual((await textBox($TEXT_BOX).value()).replace('\\\\','\\'), q.toLowerCase())
+    assert.strictEqual((await textBox($TEXT_BOX).value()).replace('\\\\', '\\'), q.toLowerCase())
 
     const match = expectedMatches[q.toLowerCase()] || q
     assert.ok(
       await text(match, { exactMatch: false }, within($('ul')))
         .exists(100, 9000),
-      `Did not find '${match}' within search for '${q}'` )
+      `Did not find '${match}' within search for '${q}'`)
   }
 })
 
@@ -112,20 +114,30 @@ step('I see the <content> character', async content => assert.ok(await text(cont
 
 step('Page contains <content>', async content => assert.ok(await text(content).exists()))
 
+step('Scroll down to <text>', async (text) => await scrollDown(text))
+
+step('Open details for result <nth>', async (nth) => {
+  await focus(textBox($TEXT_BOX))
+  await press('Tab')
+  let i = parseInt(nth)
+  while(--i > 0) await press('ArrowRight')
+  await press('Enter')
+})
+
 step('Click link <arg0>', async text => await click(text))
 
 step('Click number <arg0>', tap)
 step('Click the <arg0> character', async (char) => {
   await click(char)
   await press(' ')
-} )
+})
 step('Click the <arg0> symbol', async (char) => {
   await click(char)
   await press(' ')
-} )
+})
 step('Click the <arg0> message', tap)
 
-step("Type the <arg0> key", async function(key) {
+step("Type the <arg0> key", async function (key) {
   await press(key)
 });
 

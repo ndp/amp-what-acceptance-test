@@ -32,7 +32,7 @@
 * I see the "$" symbol
 * I see the "💶" symbol
 * I see the "🤑" symbol
-* Click the "🤑" character
+* Open details for result "12"
 * Page contains "money-mouth face"
 * Click link "supplemental symbols and pictographs"
 * Page contains "🤀"

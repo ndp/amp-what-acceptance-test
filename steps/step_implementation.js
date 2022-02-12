@@ -81,7 +81,7 @@ step('Search for lines <n> of <queries>', async (range, queries) => {
   const [first, last] = range.split('-')
   const qs = queries.split('\n').slice(first - 1, last).map(s => s.trim())
   for (const q of qs) {
-    await clear(textBox($TEXT_BOX))
+    await clear(textBox($TEXT_BOX), {navigationTimeout: 35000})
     await write(q, into(textBox($TEXT_BOX)))
     assert.strictEqual(q, await textBox($TEXT_BOX).value())
 

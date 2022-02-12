@@ -71,10 +71,10 @@ step('Type <arg0> slowly', async q => await write(q, { delay: 200 }))
 step('The page title is <expectedTitle>', async expectedTitle => assert.strictEqual(expectedTitle, await title()))
 
 step('The page title is the generic page title', async () => {
-  assert.strictEqual('Discover Unicode & Character Entities | Amp What', await title())
+  assert.strictEqual('Discover Unicode Character Entities & Symbols | Amp What', await title())
 })
 
-step('The page title has <word>', async word => assert.strictEqual(`“${word}” Unicode Characters & Entities Search | Amp What`, await title()))
+step('The page title has <word>', async word => assert.strictEqual(`“${word}” Unicode Characters, Symbols & Entities Search | Amp What`, await title()))
 
 
 step('Search for lines <n> of <queries>', async (range, queries) => {

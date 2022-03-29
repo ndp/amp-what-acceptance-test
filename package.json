@@ -8,7 +8,6 @@
     "test:staging": "HOST=amp-what-staging.herokuapp.com gauge run -c2 specs/*.md",
     "test:localhost": "HOST=localhost:5000 INSECURE=1 gauge run -c2   specs/*.md"
   },
-  "dependencies": {},
   "devDependencies": {
     "@getgauge/cli": "*",
     "gauge": "*",

@@ -4,9 +4,9 @@
   "license": "UNLICENSED",
   "description": "Acceptance Tests for amp-what.com, written in Gauge",
   "scripts": {
-    "test": "gauge run specs/*.md",
-    "test:staging": "HOST=amp-what-staging.herokuapp.com gauge run specs/*.md",
-    "test:localhost": "HOST=localhost:5000 INSECURE=1 gauge run specs/*.md"
+    "test": "gauge run -c2 specs/*.md",
+    "test:staging": "HOST=amp-what-staging.herokuapp.com gauge run -c2 specs/*.md",
+    "test:localhost": "HOST=localhost:5000 INSECURE=1 gauge run -c2   specs/*.md"
   },
   "dependencies": {},
   "devDependencies": {

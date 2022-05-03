@@ -105,13 +105,14 @@
 * Type "right-pointing double angle quotation mark" slowly
 * I see the "right-pointing double angle quotation mark" character
 
-## Look for unicode sequences
+## Unicode sequences
 
 * Visit amp-what
 * Search for "medium-light skin tone"
 * I see the "person bouncing ball" symbol
 * I see the "person gesturing ok" symbol
 * I see the "mx claus" symbol
+
 * Search for "flag"
 * Click the "Click to show more than 250." message
 * I see the "pirate flag" symbol
@@ -119,8 +120,6 @@
 * I see the "white flag" symbol
 * I see the "&#127462;&#127466;" symbol
 * I see the "crossed flag" symbol
-* I see the "pirate flag" symbol
-* I see the "rainbow flag" symbol
 * Click number "&#127462;&#127466;"
 * Page contains "United Arab Emirates"
 
@@ -129,7 +128,7 @@
 * Click number "&#127462;&#127466;"
 * Page contains "United Arab Emirates"
 
-## Try forward and back
+## Forward and back
 
 * Visit amp-what
 * Search for "esperanto"

@@ -12,6 +12,7 @@
   "devDependencies": {
     "@getgauge/cli": "*",
     "gauge": "*",
+    "playwright": "^1.21.1",
     "taiko": "*"
   }
 }

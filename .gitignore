@@ -9,3 +9,6 @@ reports
 
 # Gauge - JavaScript node dependencies
 node_modules
+test-results/
+playwright-report/
+/.vscode/

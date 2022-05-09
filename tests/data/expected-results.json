@@ -41,7 +41,7 @@
   "home": "house garden",
   "icon": "fax icon",
   "latin ligature": "latin small ligature fi",
-  "leaf": "four leaf clover",
+  "leaf": ["herb", "leafy green"],
   "left": "left parenthesis",
   "left arrow": "leftwards arrow",
   "line": "vertical line",

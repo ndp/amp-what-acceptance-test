@@ -1,8 +1,5 @@
 import { test } from '@playwright/test'
-
-import {
-  App
-} from './page-objects/app'
+import { App } from './page-objects/app'
 
 test.describe('Help', () => {
   test('Using the help page modal', async ({ page }) => {

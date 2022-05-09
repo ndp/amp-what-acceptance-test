@@ -4,7 +4,7 @@ import * as fs from 'fs'
 import path from 'path'
 
 const queries = fs.readFileSync(path.resolve(__dirname, './data/top-1000-queries.csv'))
-const expectedMatches = require(path.resolve(__dirname, './data/expected-results.json'))
+const expectedMatches = require(path.resolve(__dirname, './data/expected-results.json')) as Record<string, string | string[]>
 
 
 test.describe('Top Queries', () => {
@@ -13,22 +13,25 @@ test.describe('Top Queries', () => {
 
   for (const q of qs) {
 
-    const match = expectedMatches[q.toLowerCase()] || q
+    const matches = [expectedMatches[q.toLowerCase()] || q].flat()
 
-    test(`Landing page for "${q}" has "${match}" character`, async ({ page }) => {
-      const app = new App(page)
-      await app.gotoLandingPage(q)
-      await app.expectCurrentQuery(q)
-      await app.expectSymbolResult(match)
-    })
+    for (const match of matches) {
 
-    test(`Search for "${q}" shows "${match}" character`, async ({ page }) => {
-      const app = new App(page)
-      await app.goto('/')
-      await app.searchFor(q)
-      await app.expectCurrentQuery(q)
-      await app.expectSymbolResult(match)
-    })
+      test(`Landing page for "${q}" has "${match}" character`, async ({ page }) => {
+        const app = new App(page)
+        await app.gotoLandingPage(q)
+        await app.expectCurrentQuery(q)
+        await app.expectSymbolResult(match)
+      })
+
+      test(`Search for "${q}" shows "${match}" character`, async ({ page }) => {
+        const app = new App(page)
+        await app.goto('/')
+        await app.searchFor(q)
+        await app.expectCurrentQuery(q)
+        await app.expectSymbolResult(match)
+      })
+    }
   }
 })
 

@@ -1,22 +1,16 @@
 {
   "name": "amp-what-acceptance-test",
-  "version": "0.0.4",
+  "version": "1.0",
   "license": "UNLICENSED",
-  "description": "Acceptance Tests for amp-what.com, written in Gauge",
+  "description": "Acceptance Tests for amp-what.com, written in Playwright",
   "scripts": {
-    "play": "yarn playwright test",
-    "play:staging": "HOST=amp-what-staging.herokuapp.com yarn playwright test",
-    "play:local": "HOST=localhost:5000 INSECURE=1 yarn playwright test",
-    "test": "gauge run -c2 specs/*.md",
-    "test:staging": "gauge run -c2 specs/*.md",
-    "test:localhost": "HOST=localhost:5000 INSECURE=1 gauge run -c2   specs/*.md"
+    "test": "yarn playwright test",
+    "test:staging": "HOST=amp-what-staging.herokuapp.com yarn playwright test",
+    "test:local": "HOST=localhost:5000 INSECURE=1 yarn playwright test"
   },
   "dependencies": {},
   "devDependencies": {
-    "@getgauge/cli": "*",
     "@playwright/test": "*",
-    "gauge": "*",
-    "playwright": "*",
-    "taiko": "*"
+    "playwright": "*"
   }
 }

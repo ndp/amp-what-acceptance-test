@@ -3,8 +3,8 @@ import { App } from './page-objects/app'
 import * as fs from 'fs'
 import path from 'path'
 
-const queries = fs.readFileSync(path.resolve(__dirname, '../steps/top-1000-queries.csv'))
-const expectedMatches = require(path.resolve(__dirname, '../steps/expected-results.json'))
+const queries = fs.readFileSync(path.resolve(__dirname, './data/top-1000-queries.csv'))
+const expectedMatches = require(path.resolve(__dirname, './data/expected-results.json'))
 
 
 test.describe('Top Queries', () => {

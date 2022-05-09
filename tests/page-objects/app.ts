@@ -60,9 +60,9 @@ export class App {
   }
 
   async viewDetailsForResultNumber (index: number) {
-    this.page.press('#q', 'Tab')
+    await this.page.press('#q', 'Tab')
     while (--index)
-      this.page.keyboard.press('ArrowRight')
+      await this.page.keyboard.press('ArrowRight')
     await this.page.keyboard.press(' ')
     return new DetailView(this.page)
   }
@@ -104,8 +104,6 @@ export class App {
 
 
   async expectClipboardContents (expected: string) {
-    //await this.page.context().grantPermissions(['clipboard-read'])
-
     const content = await this.page.evaluate('navigator.clipboard.readText()')
 
     expect(content).toEqual(expected)
@@ -121,7 +119,7 @@ export class App {
 
   async expectCurrentQuery (expectedQ: string) {
     const actualQ = await this.page.$eval('#q', (el: HTMLInputElement) => el.value)
-    expect(actualQ.replace('\\\\', '\\')).toEqual(expectedQ.toLowerCase())
+    expect(actualQ.replace('\\\\', '\\').toLowerCase()).toEqual(expectedQ.toLowerCase())
   }
 }
 

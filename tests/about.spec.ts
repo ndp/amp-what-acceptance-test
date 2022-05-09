@@ -1,8 +1,5 @@
 import { test } from '@playwright/test'
-
-import {
-  App
-} from './page-objects/app'
+import { App } from './page-objects/app'
 
 test.describe('AmpWhat about page', () => {
   test('make sure it is available', async ({ page }) => {

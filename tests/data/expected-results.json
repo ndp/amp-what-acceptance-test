@@ -17,7 +17,11 @@
   "checkbox": "heavy ballot x",
   "check": "ballot box check",
   "chess": "white chess pawn",
-  "circle": "double circled digit six",
+  "circle": [
+    "hebrew mark masora circle",
+    "bullet",
+    "dotted circle"
+  ],
   "cross": "latin cross",
   "computer": "floppy disk",
   "currency": "banknote euro sign",
@@ -33,7 +37,7 @@
   "emoticons": "kissing face",
   "emoji": "kissing face",
   "esperanto": "latin small letter j circumflex",
-  "flag": "triangular flag on post",
+  "flag": "flag in hole",
   "french": "Ë",
   "green": "green apple",
   "hand": "raised hand",
@@ -41,7 +45,10 @@
   "home": "house garden",
   "icon": "fax icon",
   "latin ligature": "latin small ligature fi",
-  "leaf": ["herb", "leafy green"],
+  "leaf": [
+    "herb",
+    "leafy green"
+  ],
   "left": "left parenthesis",
   "left arrow": "leftwards arrow",
   "line": "vertical line",
@@ -55,7 +62,7 @@
   "person": "swimmer",
   "phone": "mobile phone",
   "plus": "plus sign",
-  "quote": "apostrophe",
+  "quote": ["quotation mark","apostrophe"],
   "right": "right parenthesis",
   "right arrow": "rightwards arrow",
   "search": "right-pointing magnifying glass",

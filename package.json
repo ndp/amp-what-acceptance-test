@@ -6,7 +6,8 @@
   "scripts": {
     "test": "yarn playwright test",
     "test:staging": "HOST=amp-what-staging.herokuapp.com yarn playwright test",
-    "test:local": "HOST=localhost:5000 INSECURE=1 yarn playwright test"
+    "test:local": "HOST=localhost:5000 INSECURE=1 yarn playwright test",
+    "test:report": "yarn playwright show-report"
   },
   "devDependencies": {
     "@playwright/test": "*",

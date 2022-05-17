@@ -13,8 +13,8 @@ test.describe('Mobile', () => {
     await app.expectSymbolResult('💶')
     await app.expectSymbolResult('🤑')
     const details = await app.viewDetails('🤑')
-    details.expectVisibleElement('money-mouth face')
-    details.clickLink('supplemental symbols and pictographs')
+    await details.expectVisibleElement('money-mouth face')
+    await details.clickLink('supplemental symbols and pictographs')
     await app.expectSymbolResult('🤎')
     await app.expectSymbolResult('🧶')
 

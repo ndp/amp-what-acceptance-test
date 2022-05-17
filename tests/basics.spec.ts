@@ -73,8 +73,9 @@ test.describe('AmpWhat.com basics', () => {
       await app.clickLinkWithTitle('person')
       await app.expectCharacterResult('swimmer')
       await app.expectCharacterResult('surfer')
-      await app.expectCharacterResult('boy')
-      await app.expectCharacterResult('girl')
+      await app.expectCharacterResult('man in tuxedo')
+      await app.expectCharacterResult('adult')
+      await app.expectCharacterResult('shrug')
 
       await app.clickLinkWithTitle('car')
       // await app.expectCharacterResult('tram')
@@ -192,8 +193,6 @@ test.describe('AmpWhat.com basics', () => {
       await app.searchFor('yabba dabba doo')
       await app.expectVisibleText('No matches.')
       await app.goto('/')
-      await app.searchFor('(not set)')
-      await app.expectVisibleText('No matches.')
     })
 
     test('Keyboard navigation', async ({ page }) => {
@@ -205,8 +204,8 @@ test.describe('AmpWhat.com basics', () => {
       await app.expectSymbolResult('💶')
       await app.expectSymbolResult('🤑')
       const details = await app.viewDetailsForResultNumber(12)
-      details.expectVisibleElement('money-mouth face')
-      details.clickLink('supplemental symbols and pictographs')
+      await details.expectVisibleElement('money-mouth face')
+      await details.clickLink('supplemental symbols and pictographs')
       await app.expectSymbolResult('🤎')
       await app.expectSymbolResult('🧶')
 

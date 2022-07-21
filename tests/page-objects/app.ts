@@ -2,9 +2,26 @@ import { expect, Page } from '@playwright/test'
 
 const PAGE_LOAD_TIMEOUT_MS = 15000
 
-export class App {
-
+class Shared {
   constructor (readonly page: Page) {
+  }
+
+  async expectClipboardContents (expected: string) {
+    const content = await this.page.evaluate('navigator.clipboard.readText()')
+
+    return expect(content).toEqual(expected)
+  }
+
+  async expectVisibleText (text: string) {
+    return expect(this.page.locator(`text=${text}`).first()).toBeVisible()
+  }
+
+}
+
+export class App extends Shared {
+
+  constructor (page: Page) {
+    super(page)
   }
 
   async goto (path = '/') {
@@ -67,10 +84,6 @@ export class App {
     return new DetailView(this.page)
   }
 
-  async expectVisibleText (text: string) {
-    return expect(this.page.locator(`text=${text}`).first()).toBeVisible()
-  }
-
   async expectVisibleElement (text: string) {
     const selector = `text="${text}"`
     await this.page.locator(selector).first().scrollIntoViewIfNeeded()
@@ -94,19 +107,12 @@ export class App {
 
   async clickAboutAmpWhat () {
     await this.clickLink('About Amp What')
-    await expect(this.page.locator('text=' + 'HTML character entities').first()).toBeVisible()
-    await expect(this.page.locator('text=' + 'Unicode characters').first()).toBeVisible()
-    await expect(this.page.locator('text=' + 'W3').first()).toBeVisible()
-    await expect(this.page.locator('text=' + '/Latest\\s+Unicode\\.org\\s+international\\s+character\\s+reference/').first()).toBeVisible()
-
-    // todo Return AboutPage
+    return new AboutPage(this.page)
   }
 
-
-  async expectClipboardContents (expected: string) {
-    const content = await this.page.evaluate('navigator.clipboard.readText()')
-
-    expect(content).toEqual(expected)
+  async visitAboutPage () {
+    this.goto('/about.html')
+    return new AboutPage(this.page)
   }
 
   async clickElement (s: string) {
@@ -123,9 +129,27 @@ export class App {
   }
 }
 
-export class DetailView {
+export class AboutPage extends Shared {
+  constructor (page: Page) {
+    super(page)
+  }
 
-  constructor (readonly page: Page) {
+  async expectedContent () {
+    await expect(this.page.locator('text=' + 'HTML character entities').first()).toBeVisible()
+    await expect(this.page.locator('text=' + 'Unicode characters').first()).toBeVisible()
+    await expect(this.page.locator('text=' + 'W3').first()).toBeVisible()
+    await expect(this.page.locator('text=' + '/Latest\\s+Unicode\\.org\\s+international\\s+character\\s+reference/').first()).toBeVisible()
+
+    await this.expectVisibleText('discoverable')
+    return this.expectVisibleText('fun')
+  }
+
+}
+
+export class DetailView extends Shared {
+
+  constructor (page: Page) {
+    super(page)
   }
 
   async clickSymbol () {
@@ -142,6 +166,15 @@ export class DetailView {
 
   async clickLink (linkText: string) {
     return this.page.locator(`#modal-scroll >> text=${linkText}`).click()
+  }
+
+  async exitDetails () {
+    return await this.page.keyboard.press('Escape')
+  }
+
+  async clickToCopy (text: string) {
+    await this.page.locator(`#modal-scroll >> text=${text}`).click()
+    return expect(this.page.locator(`text=${text} copied.`).first()).toBeVisible()
   }
 }
 

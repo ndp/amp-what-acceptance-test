@@ -18,8 +18,10 @@ test.describe('AmpWhat.com basics', () => {
       await app.expectSymbolResult('banknote dollar sign')
 
       const details = await app.viewDetails('money-mouth face')
-      await details.clickLink('supplemental symbols and pictographs')
+      await details.clickToCopy('supplemental symbols and pictographs')
+      await details.exitDetails()
 
+      await app.searchFor('supplemental symbols and pictographs')
       await app.expectVisibleElement('circled cross formee four dots')
       await app.expectVisibleElement('brown heart')
 
@@ -205,10 +207,7 @@ test.describe('AmpWhat.com basics', () => {
       await app.expectSymbolResult('🤑')
       const details = await app.viewDetailsForResultNumber(12)
       await details.expectVisibleElement('money-mouth face')
-      await details.clickLink('supplemental symbols and pictographs')
-      await app.expectSymbolResult('🤎')
-      await app.expectSymbolResult('🧶')
-
+      await details.clickToCopy('supplemental symbols and pictographs')
     })
 
   }

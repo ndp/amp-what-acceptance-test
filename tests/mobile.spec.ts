@@ -14,10 +14,11 @@ test.describe('Mobile', () => {
     await app.expectSymbolResult('🤑')
     const details = await app.viewDetails('🤑')
     await details.expectVisibleElement('money-mouth face')
-    await details.clickLink('supplemental symbols and pictographs')
+    await details.clickToCopy('supplemental symbols and pictographs')
+    await details.exitDetails()
+    await app.searchFor('supplemental symbols and pictographs')
     await app.expectSymbolResult('🤎')
-    await app.expectSymbolResult('🧶')
-
+    return app.expectSymbolResult('🧶')
   })
 
 })

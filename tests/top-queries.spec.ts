@@ -33,6 +33,24 @@ test.describe('Top Queries', () => {
       })
     }
   }
+
+  test(`Landing page for "flag" has "flag in hole" character`, async ({ page }) => {
+    const app = new App(page)
+    await app.gotoLandingPage('flag')
+    await app.expectCurrentQuery('flag')
+    await app.clickShowMore()
+    await app.expectSymbolResult('flag in hole')
+  })
+
+  test(`Search for "flag" shows "flag in hole" character`, async ({ page }) => {
+    const app = new App(page)
+    await app.goto('/')
+    await app.searchFor('flag')
+    await app.expectCurrentQuery('flag')
+    await app.clickShowMore()
+    await app.expectSymbolResult('flag in hole')
+  })
+
 })
 
 

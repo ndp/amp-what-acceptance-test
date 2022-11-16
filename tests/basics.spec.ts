@@ -1,5 +1,5 @@
 import { test } from '@playwright/test'
-import { App } from './page-objects/app'
+import { App, DetailView } from './page-objects/app'
 
 
 test.describe('AmpWhat.com basics', () => {
@@ -26,7 +26,7 @@ test.describe('AmpWhat.com basics', () => {
       await app.expectVisibleElement('brown heart')
 
       await app.clickShowMore()
-      await app.expectVisibleElement('nazar amulet')
+      return app.expectVisibleElement('nazar amulet', { timeout: 10000})
     })
 
     test('Trying out the the sample queries', async ({ page }) => {
@@ -179,9 +179,11 @@ test.describe('AmpWhat.com basics', () => {
       await app.goto('/')
       await app.searchFor('bracket')
       await app.expectSymbolResult('tortoise shell bracketed latin capital letter s')
+      await app.expectNoTextMatching('tortoise shell bracketed cjk unified ideograph-6557')
+
       await app.clickLink('Load 55k characters')
-      await app.expectVisibleText('55405 Unicode characters loaded')
-      await app.expectSymbolResult('tortoise shell bracketed latin capital letter s')
+      await app.expectVisibleText('55405 Unicode characters loaded', { timeout: 10000})
+      await app.expectSymbolResult('tortoise shell bracketed latin capital letter s', { timeout: 10000})
       await app.expectSymbolResult('tortoise shell bracketed cjk unified ideograph-6557')
       await app.searchFor('esperanto')
       await app.expectSymbolResult('Ĉ')

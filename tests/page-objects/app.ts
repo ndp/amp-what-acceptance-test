@@ -12,8 +12,10 @@ class Shared {
     return expect(content).toEqual(expected)
   }
 
-  async expectVisibleText (text: string) {
-    return expect(this.page.locator(`text=${text}`).first()).toBeVisible()
+  async expectVisibleText (text: string, options?: {
+    timeout: number;
+  }) {
+    return expect(this.page.locator(`text=${text}`).first()).toBeVisible(options)
   }
 
 }
@@ -69,7 +71,7 @@ export class App extends Shared {
     expect(await this.page.title()).toContain(s)
   }
 
-  async viewDetails (s: string) {
+  async viewDetails (s: string): Promise<DetailView> {
     await this.expectSymbolResult(s)
     await this.page.locator(`text="${s}"`).click()
     await this.page.keyboard.press(' ')
@@ -84,21 +86,25 @@ export class App extends Shared {
     return new DetailView(this.page)
   }
 
-  async expectVisibleElement (text: string) {
+  async expectVisibleElement (text: string, options?:  { timeout?: number }) {
     const selector = `text="${text}"`
     await this.page.locator(selector).first().scrollIntoViewIfNeeded()
-    return expect(this.page.locator(selector).first()).toBeVisible()
+    return expect(this.page.locator(selector).first()).toBeVisible(options)
   }
 
-  async expectSymbolResult (str: string, option: null | 'scrollTo' = null) {
+  async expectSymbolResult (str: string, options?:  { scrollTo?: boolean, timeout?: number }) {
     const selector = `text="${str}"`
-    if (option === 'scrollTo')
+    if (options?.scrollTo)
       await this.page.locator(selector).first().scrollIntoViewIfNeeded()
-    return expect(this.page.locator(selector).first()).toBeVisible()
+    return expect(this.page.locator(selector).first()).toBeVisible(options)
   }
 
   async expectCharacterResult (str: string) {
     return expect(this.page.locator(`text=${str}`).first()).toBeVisible()
+  }
+
+  async expectNoTextMatching(str: string) {
+    return expect(this.page.locator('body')).not.toContainText(str)
   }
 
   async clickShowMore () {

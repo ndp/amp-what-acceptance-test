@@ -11,6 +11,8 @@
   },
   "devDependencies": {
     "@playwright/test": "*",
+    "@types/es6-promise": "*",
+    "@types/node": "*",
     "playwright": "*",
     "typescript": "*"
   }

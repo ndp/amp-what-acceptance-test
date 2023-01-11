@@ -30,7 +30,7 @@ export class App extends Shared {
     await this.page.goto(path, { timeout: PAGE_LOAD_TIMEOUT_MS })
 
     if (path === '/') {
-      await expect(this.page).toHaveTitle('Discover Unicode Character Entities & Symbols | Amp What')
+      await expect(this.page).toHaveTitle('Discover Unicode Character Entities & Symbols | AmpWhat')
       await expect(this.page.locator('text=' + 'Andrew J. Peterson.').first()).toBeVisible()
       await expect(this.page.locator('text=' + 'All Rights Reserved').first()).toBeVisible()
     }
@@ -112,7 +112,7 @@ export class App extends Shared {
   }
 
   async clickAboutAmpWhat () {
-    await this.clickLink('About Amp What')
+    await this.clickLink('About AmpWhat')
     return new AboutPage(this.page)
   }
 

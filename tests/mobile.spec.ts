@@ -2,7 +2,7 @@ import { test } from '@playwright/test'
 import { App } from './page-objects/app'
 
 test.describe('Mobile', () => {
-  test('Visit Amp-What on a small screen', async ({ page }) => {
+  test('Visit AmpWhat on a small screen', async ({ page }) => {
     const app = new App(page)
     await app.goto('/')
 

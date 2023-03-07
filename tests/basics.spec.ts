@@ -149,12 +149,12 @@ test.describe('AmpWhat.com basics', () => {
       await app.expectSymbolResult('&#127462;&#127466;')
       await app.expectSymbolResult('crossed flags') // in show more!
       const details = await app.viewDetails('&#127462;&#127466;')
-      await details.expectVisibleElement('united arab emirates')
+      await details.expectVisibleElement('united arab emirates flag')
 
       await app.goto('/')
       await app.searchFor('&#127462;&#127466;')
       const details2 = await app.viewDetails('&#127462;&#127466;')
-      await details2.expectVisibleElement('united arab emirates')
+      await details2.expectVisibleElement('united arab emirates flag')
     })
 
     test('Forward and back', async ({ page }) => {

@@ -3,6 +3,8 @@ Acceptance Tests for amp-what.com, written in Playwright
 
 ## Running Tests
 ```
+$ yarn install
+$ npx playwright install --with-deps
 $ yarn test
 $ yarn test:staging
 $ yarn test:localhost
@@ -30,3 +32,9 @@ Moved Permanently. Redirecting to https://www.amp-what.com/foo
 $ curl www.ampwhat.com/foo
 Moved Permanently. Redirecting to https://www.amp-what.com/foo
 ```
+
+
+## TODO
+
+- [ ] skip google and add URLs during test
+- [ ] run lighthouse tests

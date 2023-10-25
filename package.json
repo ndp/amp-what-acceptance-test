@@ -4,15 +4,15 @@
   "license": "UNLICENSED",
   "description": "Acceptance Tests for amp-what.com, written in Playwright",
   "scripts": {
-    "test": "yarn playwright test",
-    "test:staging": "HOST=amp-what-staging.herokuapp.com yarn playwright test",
-    "test:local": "HOST=localhost:5000 INSECURE=1 yarn playwright test",
+    "test": "WORKERS=2 yarn playwright test",
+    "test:staging": "WORKERS=3 HOST=amp-what-staging.herokuapp.com yarn playwright test",
+    "test:local": "WORKERS=4 HOST=localhost:5000 HTTPS=0 yarn playwright test",
     "test:report": "yarn playwright show-report"
   },
   "devDependencies": {
     "@playwright/test": "^1.29.2",
-    "@types/es6-promise": "^3.3.0",
-    "@types/node": "^20.8.6",
+    "@types/node": "^20",
+    "ts-envs": "*",
     "typescript": "^5.2.2"
   }
 }

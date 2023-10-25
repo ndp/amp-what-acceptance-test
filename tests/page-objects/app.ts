@@ -1,6 +1,13 @@
-import { expect, Page } from '@playwright/test'
+import { expect, Page, test } from '@playwright/test'
 
 const PAGE_LOAD_TIMEOUT_MS = 15000
+
+test.beforeEach(async ({page}) => {
+  await page.route(/googletagmanager|rollbar|google-analytics/, async (route, request) => {
+    //console.log('abort URL: ', request.url())
+    await route.abort()
+  })
+})
 
 class Shared {
   constructor (readonly page: Page) {

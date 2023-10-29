@@ -1,6 +1,6 @@
-import type { PlaywrightTestConfig } from '@playwright/test'
-import { devices } from '@playwright/test'
-import { configure } from 'ts-envs'
+import type {PlaywrightTestConfig} from '@playwright/test'
+import {devices} from '@playwright/test'
+import {configure} from 'ts-envs'
 
 
 /**
@@ -75,7 +75,7 @@ const config: PlaywrightTestConfig = {
   projects: [
     {
       name: 'chromium',
-      testIgnore: /(mobile).spec.ts/, // not supported
+      testIgnore: /(mobile|lighthouse).spec.ts/, // not supported
       use:  {
         permissions: ['clipboard-read'],
         ...devices['Desktop Chrome']
@@ -84,7 +84,7 @@ const config: PlaywrightTestConfig = {
 
     {
       name:       'firefox',
-      testIgnore: /(clipboard|mobile|top-queries).spec.ts/, // not supported
+      testIgnore: /(clipboard|mobile|top-queries|lighthouse).spec.ts/, // not supported
       use:        {
         ...devices['Desktop Firefox']
       }
@@ -92,6 +92,7 @@ const config: PlaywrightTestConfig = {
     {
       name:      'Mobile Chrome',
       testMatch: /mobile.spec.ts/,
+      testIgnore: /lighthouse/,
       use:       {
         ...devices['Pixel 5']
       }
@@ -99,6 +100,7 @@ const config: PlaywrightTestConfig = {
     {
       name:      'Mobile Safari',
       testMatch: /mobile.spec.ts/,
+      testIgnore: /lighthouse/,
       use:       {
         ...devices['iPhone 12']
       }
@@ -106,9 +108,15 @@ const config: PlaywrightTestConfig = {
     {
       name:      'Mobile Safari (landscape)',
       testMatch: /mobile.spec.ts/,
+      testIgnore: /lighthouse/,
       use:       {
         ...devices['iPhone 12 landscape']
       }
+    },
+    {
+      name: 'Lighthouse',
+      retries: 0,
+      testMatch: /lighthouse/
     }
   ],
 

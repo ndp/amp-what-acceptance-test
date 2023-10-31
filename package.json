@@ -12,6 +12,9 @@
   "devDependencies": {
     "@playwright/test": "^1.39.0",
     "@types/node": "^20.8.9",
+    "lighthouse": "9.6.8",
+    "playwright": "^1.39.0",
+    "playwright-lighthouse": "2.2.2",
     "ts-envs": "*",
     "typescript": "^5.2.2"
   },

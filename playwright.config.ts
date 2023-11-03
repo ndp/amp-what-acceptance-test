@@ -27,6 +27,11 @@ const envs = configure({
     required: false,
     description: 'whether site is served via https (instead of http)'
   },
+  retries: {
+    type: 'integer',
+    required: false,
+    default: 3
+  },
   workers: {
     type: 'integer',
     default: 0,
@@ -53,7 +58,7 @@ const config: PlaywrightTestConfig = {
   forbidOnly: envs.ci,
   /* Retry on CI only */
   // retries: envs.ci ? 2 : 0,
-  retries: 3,
+  retries: envs.retries,
   /* Opt out of parallel tests on CI: envs.ci ? 1 : undefined */
   workers: envs.workers || 0.5,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */

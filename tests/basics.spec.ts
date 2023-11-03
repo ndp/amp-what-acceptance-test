@@ -182,7 +182,7 @@ test.describe('AmpWhat.com basics', () => {
       await app.expectNoTextMatching('tortoise shell bracketed cjk unified ideograph-6557')
 
       await app.clickLink('Load 55k characters')
-      await app.expectVisibleText('55405 Unicode characters loaded', { timeout: 10000})
+      await app.expectVisibleText('55538 Unicode characters loaded', { timeout: 10000})
       await app.expectSymbolResult('tortoise shell bracketed latin capital letter s', { timeout: 10000})
       await app.expectSymbolResult('tortoise shell bracketed cjk unified ideograph-6557')
       await app.searchFor('esperanto')

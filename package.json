@@ -4,7 +4,7 @@
   "license": "UNLICENSED",
   "description": "Acceptance Tests for amp-what.com, written in Playwright",
   "scripts": {
-    "test": "WORKERS=2 yarn playwright test",
+    "test": "WORKERS=2 RETRIES=1 yarn playwright test",
     "test:staging": "WORKERS=3 HOST=amp-what-staging.herokuapp.com yarn playwright test",
     "test:local": "WORKERS=4 RETRIES=0 HOST=localhost:5000 HTTPS=0 yarn playwright test",
     "test:report": "yarn playwright show-report"

@@ -71,7 +71,7 @@ export class App extends Shared {
   }
 
   async expectPath (p: string) {
-    return this.page.waitForURL(p)
+    return this.page.waitForFunction(expectedPath => document.location.pathname === expectedPath, p, { polling: 250, timeout: 5000 })
   }
 
   async expectPageTitleContains (s: string) {
@@ -186,8 +186,8 @@ export class DetailView extends Shared {
   }
 
   async clickToCopy (text: string) {
-    await this.page.locator(`#modal-scroll >> text=${text}`).click()
-    return expect(this.page.locator(`text=${text} copied.`).first()).toBeVisible()
+    await this.page.locator(`#modal-scroll >> text="${text}"`).click()
+    return expect(this.page.locator(`text="${text} copied."`).first()).toBeVisible()
   }
 }
 

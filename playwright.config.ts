@@ -1,6 +1,7 @@
 import type { PlaywrightTestConfig } from '@playwright/test'
 import { devices } from '@playwright/test'
 import { configure } from 'ts-envs'
+import type { EnvsConfiguration } from 'ts-envs'
 
 
 /**
@@ -9,8 +10,7 @@ import { configure } from 'ts-envs'
  */
 // require('dotenv').config();
 
-
-const envs = configure({
+const configuration = {
   ci: {
     type: 'boolean',
     required: false,
@@ -37,7 +37,10 @@ const envs = configure({
     default: 0,
     description: 'number of workers running tests. 0 sets automatically'
   }
-})
+} satisfies EnvsConfiguration
+
+const envs = configure(configuration)
+
 
 // console.log(envs.helpText)
 /**

@@ -9,6 +9,8 @@
     "test:local": "WORKERS=4 RETRIES=0 HOST=localhost:5000 HTTPS=0 yarn playwright test",
     "test:report": "yarn playwright show-report"
   },
+  "nodeVersion": "20.15",
+  "npmVersion": "10.7.0",
   "devDependencies": {
     "@playwright/test": "^1.39.0",
     "@types/node": "^20.8.9",

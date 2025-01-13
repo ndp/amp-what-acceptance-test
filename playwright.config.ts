@@ -82,40 +82,83 @@ const config: PlaywrightTestConfig = {
   /* https://github.com/microsoft/playwright/blob/main/packages/playwright-core/src/server/deviceDescriptorsSource.json */
   projects: [
     {
-      name: 'chromium',
+      name: 'Desktop Chrome',
       testIgnore: /(mobile).spec.ts/, // not supported
       use:  {
-        permissions: ['clipboard-read'],
-        ...devices['Desktop Chrome']
-      }
-    },
-
-    {
-      name:       'firefox',
-      testIgnore: /(clipboard|mobile|top-queries).spec.ts/, // not supported
-      use:        {
-        ...devices['Desktop Firefox']
+        permissions: ['clipboard-read', 'clipboard-write'],
+        ...devices['Desktop Chrome'], channel: 'chrome'
       }
     },
     {
-      name:      'Mobile Chrome',
+      name: 'Desktop Edge',
+      testIgnore: /(mobile).spec.ts/, // not supported
+      use:  {
+        permissions: ['clipboard-read', 'clipboard-write'],
+        ...devices['Desktop Edge'], channel: 'msedge'
+      }
+    },
+    {
+      name: 'Desktop Safari',
+      testIgnore: /(mobile).spec.ts/, // not supported
+      use:  {
+        permissions: ['clipboard-read', 'clipboard-write'],
+        ...devices['Desktop Safari']
+      }
+    },
+    {
+      name: 'Desktop Firefox',
+      testIgnore: /(mobile|top-queries).spec.ts/, // not supported
+      use: {
+        ...devices['Desktop Firefox'],
+        launchOptions: {
+          ...devices['Desktop Firefox'].launchOptions,
+          firefoxUserPrefs: {
+            'dom.events.asyncClipboard.readText': true,
+            'dom.events.testing.asyncClipboard': true,
+          },
+        },
+      }
+    },
+    {
+      name:      'Pixel 7',
       testMatch: /mobile.spec.ts/,
       use:       {
-        ...devices['Pixel 5']
+        ...devices['Pixel 7']
       }
     },
     {
-      name:      'Mobile Safari',
+      name:      'Pixel 7 landscape',
       testMatch: /mobile.spec.ts/,
       use:       {
-        ...devices['iPhone 12']
+        ...devices['Pixel 7 landscape']
       }
     },
     {
-      name:      'Mobile Safari (landscape)',
+      name:      'iPhone 13 Mini',
       testMatch: /mobile.spec.ts/,
       use:       {
-        ...devices['iPhone 12 landscape']
+        ...devices['iPhone 13 Mini']
+      }
+    },
+    {
+      name:      'iPhone 13 Mini (landscape)',
+      testMatch: /mobile.spec.ts/,
+      use:       {
+        ...devices['iPhone 13 Mini landscape']
+      }
+    },
+    {
+      name:      'iPhone 14',
+      testMatch: /mobile.spec.ts/,
+      use:       {
+        ...devices['iPhone 14']
+      }
+    },
+    {
+      name:      'iPhone 15',
+      testMatch: /mobile.spec.ts/,
+      use:       {
+        ...devices['iPhone 15']
       }
     }
   ],

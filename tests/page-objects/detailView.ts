@@ -1,5 +1,5 @@
 import {Shared} from "./shared";
-import {expect, Page, test} from "@playwright/test";
+import {expect, Page} from "@playwright/test";
 
 export class DetailView extends Shared {
 

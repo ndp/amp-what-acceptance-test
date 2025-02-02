@@ -2,11 +2,10 @@ import { test } from '@playwright/test'
 import { App } from './page-objects/app'
 import * as fs from 'fs'
 import path from 'path'
+import {expectedMatchesFor} from './data/util'
+
 
 const queries = fs.readFileSync(path.resolve(__dirname, './data/top-1000-queries.csv'))
-
-import _expectedMatches from './data/expected-results.json' assert { type: "json" }
-const expectedMatches = _expectedMatches as Record<string, string|string[]>
 
 test.describe('Top Queries', () => {
 
@@ -18,7 +17,7 @@ test.describe('Top Queries', () => {
 
   for (const q of qs) {
 
-    const matches = [(expectedMatches[q.toLowerCase()] as string|string[]|undefined) || q].flat()
+    const matches = expectedMatchesFor(q)
 
     for (const match of matches) {
 

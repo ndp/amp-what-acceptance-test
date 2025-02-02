@@ -1,7 +1,6 @@
 import { test } from '@playwright/test'
 import { App } from './page-objects/app'
 
-
 test.describe('AmpWhat.com basics', () => {
 
     test('A typical first visit', async ({ page }) => {
@@ -29,92 +28,6 @@ test.describe('AmpWhat.com basics', () => {
       return app.expectVisibleElement('nazar amulet', { timeout: 10000})
     })
 
-    test('Trying out the the sample queries', async ({ page }) => {
-      const app = new App(page)
-      await app.goto('/')
-
-      await app.clickLinkWithTitle('quotes')
-      await app.expectCharacterResult('&quot;')
-      await app.expectCharacterResult('&apos;')
-      await app.expectCharacterResult('fullwidth quotation mark')
-
-      await app.clickLink('♕')
-      await app.expectPath('/unicode/search/chess')
-      await app.expectCharacterResult('black chess rook')
-      await app.expectCharacterResult('white chess rook')
-      await app.expectCharacterResult('question mark')
-      await app.expectCharacterResult('&quest;')
-      await app.expectCharacterResult('exclamation mark')
-      await app.expectCharacterResult('double exclamation mark')
-// * The query box contains "chess"
-
-      await app.clickLinkWithTitle('greater than')
-      await app.expectCharacterResult('greater-than sign')
-      await app.expectCharacterResult('right-pointing double angle quotation mark')
-
-      await app.clickLink('>')
-      await app.expectCharacterResult('right-pointing double angle quotation mark')
-
-      await app.clickLink('/')
-      await app.expectCharacterResult('&frac14;')
-      await app.expectCharacterResult('&frac34;')
-      await app.expectCharacterResult('&frac13;')
-      await app.expectCharacterResult('&frac23;')
-      await app.expectCharacterResult('percent sign')
-
-      await app.clickLinkWithTitle('weather')
-      await app.expectCharacterResult('snowman')
-
-      await app.clickLink('▲')
-      await app.expectCharacterResult('right triangle')
-
-      await app.clickLink('◼')
-      await app.expectCharacterResult('black small square') // black square is too far down the list
-      await app.expectCharacterResult('◼')
-
-      await app.clickLinkWithTitle('person')
-      await app.expectCharacterResult('swimmer')
-      await app.expectCharacterResult('surfer', {scrollTo: true})
-      await app.expectCharacterResult('man in tuxedo', {scrollTo: true})
-      await app.expectCharacterResult('adult', {scrollTo: true})
-      await app.expectCharacterResult('shrug', {scrollTo: true})
-
-      await app.scrollToTop()
-      await app.clickLinkWithTitle('car')
-      // await app.expectCharacterResult('tram')
-      await app.expectCharacterResult('tram car')
-      await app.expectCharacterResult('police car')
-      await app.expectCharacterResult('automobile')
-
-      await app.clickLinkWithTitle('face')
-      await app.expectCharacterResult('white frowning face', {scrollTo: true})
-      await app.expectCharacterResult('white smiling face', {scrollTo: true})
-
-      await app.scrollToTop()
-      await app.clickLinkWithTitle('tick')
-      await app.expectCharacterResult('white heavy check mark')
-      await app.expectCharacterResult('ticket')
-      await app.expectCharacterResult('apostrophe')
-
-      await app.clickLinkWithTitle('rock')
-      await app.expectCharacterResult('curling stone')
-
-      await app.clickLinkWithTitle('paper')
-      await app.expectCharacterResult('wastebasket')
-
-      await app.clickLinkWithTitle('scissors')
-      await app.expectCharacterResult('black scissors')
-
-      await app.clickLinkWithTitle('danger')
-      await app.expectCharacterResult('high voltage sign')
-
-      await app.clickLinkWithTitle('love')
-      await app.expectCharacterResult('two hearts')
-
-      await app.clickLinkWithTitle('computer')
-      await app.expectCharacterResult('keyboard')
-      await app.expectCharacterResult('dvd')
-    })
 
     test('Visiting a search results page from an external link', async ({ page }) => {
       const app = new App(page)

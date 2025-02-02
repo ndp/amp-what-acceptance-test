@@ -150,6 +150,21 @@ export class App extends Shared {
     const actualQ = _actualQ.replace('\\\\', '\\').toLowerCase()
     expect(actualQ).toEqual(expectedQ.toLowerCase())
   }
+
+
+  async changeNumberMode(newMode:
+                           'JSON and Javascript'
+                           | 'HTML - Hex'
+                           | 'HTML - Decimal'
+                           | 'CSS Property Values'
+                           | 'URL Encoding - %N'
+                           | 'Windows Alt Keys'
+                           | 'Unicode - U+0000'
+                           | 'None') {
+    await this.page.getByText('⛭').click()
+    await this.page.selectOption('#change-mode', newMode)
+    await this.page.getByText('Close', {exact: true}).click()
+  }
 }
 
 

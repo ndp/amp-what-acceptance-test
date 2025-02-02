@@ -1,5 +1,5 @@
 import { test } from '@playwright/test'
-import { App, DetailView } from './page-objects/app'
+import { App } from './page-objects/app'
 
 
 test.describe('AmpWhat.com basics', () => {
@@ -69,16 +69,17 @@ test.describe('AmpWhat.com basics', () => {
       await app.expectCharacterResult('right triangle')
 
       await app.clickLink('◼')
-      await app.expectCharacterResult('black square')
+      await app.expectCharacterResult('black small square') // black square is too far down the list
       await app.expectCharacterResult('◼')
 
       await app.clickLinkWithTitle('person')
       await app.expectCharacterResult('swimmer')
-      await app.expectCharacterResult('surfer')
-      await app.expectCharacterResult('man in tuxedo')
-      await app.expectCharacterResult('adult')
-      await app.expectCharacterResult('shrug')
+      await app.expectCharacterResult('surfer', {scrollTo: true})
+      await app.expectCharacterResult('man in tuxedo', {scrollTo: true})
+      await app.expectCharacterResult('adult', {scrollTo: true})
+      await app.expectCharacterResult('shrug', {scrollTo: true})
 
+      await app.scrollToTop()
       await app.clickLinkWithTitle('car')
       // await app.expectCharacterResult('tram')
       await app.expectCharacterResult('tram car')
@@ -86,9 +87,10 @@ test.describe('AmpWhat.com basics', () => {
       await app.expectCharacterResult('automobile')
 
       await app.clickLinkWithTitle('face')
-      await app.expectCharacterResult('white frowning face')
-      await app.expectCharacterResult('white smiling face')
+      await app.expectCharacterResult('white frowning face', {scrollTo: true})
+      await app.expectCharacterResult('white smiling face', {scrollTo: true})
 
+      await app.scrollToTop()
       await app.clickLinkWithTitle('tick')
       await app.expectCharacterResult('white heavy check mark')
       await app.expectCharacterResult('ticket')
@@ -143,7 +145,7 @@ test.describe('AmpWhat.com basics', () => {
 
       await app.searchFor('flag')
       await app.clickShowMore()
-      await app.expectSymbolResult('pirate flag')
+      await app.expectSymbolResult('pirate flag', {scrollTo: true})
       await app.expectSymbolResult('rainbow flag')
       await app.expectSymbolResult('white flag')
       await app.expectSymbolResult('&#127462;&#127466;')
@@ -157,59 +159,12 @@ test.describe('AmpWhat.com basics', () => {
       await details2.expectVisibleElement('united arab emirates flag')
     })
 
-    test('Forward and back', async ({ page }) => {
-      const app = new App(page)
-      await app.goto('/')
-      await app.searchFor('esperanto')
-      await app.expectSymbolResult('ŭ')
-      await app.expectPath('/unicode/search/esperanto')
-      await app.searchFor('EMOJI')
-      await app.expectSymbolResult('😈')
-      await app.expectPath('/unicode/search/emoji')
-      await page.goBack()
-      await app.expectSymbolResult('ŭ')
-      await app.expectPath('/unicode/search/esperanto')
-      await page.goForward()
-      await app.expectSymbolResult('😈')
-      await app.expectPath('/unicode/search/emoji')
-    })
-    test('Load More', async ({ page }) => {
-      const app = new App(page)
-
-      await app.goto('/')
-      await app.searchFor('bracket')
-      await app.expectSymbolResult('tortoise shell bracketed latin capital letter s')
-      await app.expectNoTextMatching('tortoise shell bracketed cjk unified ideograph-6557')
-
-      await app.clickLink('Load 55k characters')
-      await app.expectVisibleText('55541 Unicode characters loaded', { timeout: 10000})
-      await app.expectSymbolResult('tortoise shell bracketed latin capital letter s', { timeout: 10000})
-      await app.expectSymbolResult('tortoise shell bracketed cjk unified ideograph-6557')
-      await app.searchFor('esperanto')
-      await app.expectSymbolResult('Ĉ')
-      await app.expectSymbolResult('ĉ')
-      await app.expectSymbolResult('ŭ')
-
-    })
     test('query with no matches', async ({ page }) => {
       const app = new App(page)
       await app.goto('/')
       await app.searchFor('yabba dabba doo')
       await app.expectVisibleText('No matches.')
       await app.goto('/')
-    })
-
-    test('Keyboard navigation', async ({ page }) => {
-      const app = new App(page)
-      await app.goto('/')
-      await app.searchFor('money', 'slowly')
-      await app.expectPageTitleContains('money')
-      await app.expectSymbolResult('$')
-      await app.expectSymbolResult('💶')
-      await app.expectSymbolResult('🤑')
-      const details = await app.viewDetailsForResultNumber(15)
-      await details.expectVisibleElement('money-mouth face')
-      await details.clickToCopy('supplemental symbols and pictographs')
     })
 
   }

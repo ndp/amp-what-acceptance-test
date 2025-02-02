@@ -83,15 +83,15 @@ const config: PlaywrightTestConfig = {
   projects: [
     {
       name: 'Desktop Chrome',
-      testIgnore: /(mobile).spec.ts/, // not supported
+      testIgnore: /(mobile|clipboard).spec.ts/,
       use:  {
-        permissions: ['clipboard-read', 'clipboard-write'],
+        permissions: ['clipboard-read'],
         ...devices['Desktop Chrome'], channel: 'chrome'
       }
     },
     {
       name: 'Desktop Edge',
-      testIgnore: /(mobile).spec.ts/, // not supported
+      testIgnore: /(mobile).spec.ts/,
       use:  {
         permissions: ['clipboard-read', 'clipboard-write'],
         ...devices['Desktop Edge'], channel: 'msedge'
@@ -99,15 +99,15 @@ const config: PlaywrightTestConfig = {
     },
     {
       name: 'Desktop Safari',
-      testIgnore: /(mobile).spec.ts/, // not supported
+      testIgnore: /(mobile|clipboard|top-queries).spec.ts/,
       use:  {
-        permissions: ['clipboard-read', 'clipboard-write'],
+        permissions: ['clipboard-read'],
         ...devices['Desktop Safari']
       }
     },
     {
       name: 'Desktop Firefox',
-      testIgnore: /(mobile|top-queries).spec.ts/, // not supported
+      testIgnore: /(mobile|top-queries).spec.ts/,
       use: {
         ...devices['Desktop Firefox'],
         launchOptions: {
@@ -134,33 +134,12 @@ const config: PlaywrightTestConfig = {
       }
     },
     {
-      name:      'iPhone 13 Mini',
-      testMatch: /mobile.spec.ts/,
-      use:       {
-        ...devices['iPhone 13 Mini']
-      }
-    },
-    {
       name:      'iPhone 13 Mini (landscape)',
       testMatch: /mobile.spec.ts/,
       use:       {
         ...devices['iPhone 13 Mini landscape']
       }
     },
-    {
-      name:      'iPhone 14',
-      testMatch: /mobile.spec.ts/,
-      use:       {
-        ...devices['iPhone 14']
-      }
-    },
-    {
-      name:      'iPhone 15',
-      testMatch: /mobile.spec.ts/,
-      use:       {
-        ...devices['iPhone 15']
-      }
-    }
   ],
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */

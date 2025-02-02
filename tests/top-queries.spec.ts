@@ -4,16 +4,21 @@ import * as fs from 'fs'
 import path from 'path'
 
 const queries = fs.readFileSync(path.resolve(__dirname, './data/top-1000-queries.csv'))
-const expectedMatches = require(path.resolve(__dirname, './data/expected-results.json')) as Record<string, string | string[]>
 
+import _expectedMatches from './data/expected-results.json' assert { type: "json" }
+const expectedMatches = _expectedMatches as Record<string, string|string[]>
 
 test.describe('Top Queries', () => {
 
-  const qs = queries.toString().split('\n').slice(0, 60).map(q => q.trim())
+  const qs = queries
+    .toString()
+    .split('\n')
+    .slice(0, 60)
+    .map(q => q.trim())
 
   for (const q of qs) {
 
-    const matches = [expectedMatches[q.toLowerCase()] || q].flat()
+    const matches = [(expectedMatches[q.toLowerCase()] as string|string[]|undefined) || q].flat()
 
     for (const match of matches) {
 

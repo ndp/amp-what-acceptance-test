@@ -34,8 +34,4 @@ export class DetailView extends Shared {
     await expect(this.page.locator('css=div.floating-confirmation')).toHaveText(expected)
   }
 
-  supportsCopyToClipboard(): boolean {
-    // const project = test.info().project.name
-    return true
-  }
 }

@@ -1,4 +1,4 @@
-import {expect, test} from "@playwright/test";
+import {test} from "@playwright/test";
 import {App} from "./page-objects/app";
 
 test.describe('Features', () => {
@@ -48,95 +48,98 @@ test.describe('Features', () => {
     await app.expectSymbolResult('À')
 
     await app.changeNumberMode('HTML - Hex')
+
+    // Expect both number and symbolic values
     await app.expectSymbolResult('&#x40;')
     await app.expectSymbolResult('&commat;')
-    await expect(app.page.getByText('U+40')).toBeHidden();
-    await expect(app.page.getByText('U+1f405')).toBeHidden();
-    await expect(app.page.getByText('%40')).toBeHidden();
-    await expect(app.page.getByText('&#64;')).toBeHidden();
-    await expect(app.page.getByText('"@"')).toBeHidden();
-    await expect(app.page.getByText('Alt+0192')).toBeHidden();
-    await expect(app.page.getByText('\\000040')).toBeHidden();
+    await app.expectHiddenText('U+40')
+    await app.expectHiddenText('U+1f405')
+    await app.expectHiddenText('%40')
+    await app.expectHiddenText('&#64;')
+    await app.expectHiddenText('"@"')
+    await app.expectHiddenText('Alt+0192')
+    await app.expectHiddenText('\\000040')
 
     await app.changeNumberMode('HTML - Decimal')
     await app.expectSymbolResult('&#64;')
     await app.expectSymbolResult('&#128005;')
     await app.expectSymbolResult('&commat;')
-    await expect(app.page.getByText('U+40')).toBeHidden();
-    await expect(app.page.getByText('U+1f405')).toBeHidden();
-    await expect(app.page.getByText('&#x40;')).toBeHidden();
-    await expect(app.page.getByText('%40')).toBeHidden();
-    await expect(app.page.getByText('"@"')).toBeHidden();
-    await expect(app.page.getByText('Alt+0192')).toBeHidden();
-    await expect(app.page.getByText('\\000040')).toBeHidden();
+    await app.expectHiddenText('U+40')
+    await app.expectHiddenText('U+1f405')
+    await app.expectHiddenText('&#x40;')
+    await app.expectHiddenText('%40')
+    await app.expectHiddenText('"@"')
+    await app.expectHiddenText('Alt+0192')
+    await app.expectHiddenText('\\000040')
 
     await app.changeNumberMode('JSON and Javascript')
     await app.expectSymbolResult('"@"')
-    await expect(app.page.getByText('U+40')).toBeHidden();
-    await expect(app.page.getByText('U+1f405')).toBeHidden();
-    await expect(app.page.getByText('&#x40;')).toBeHidden();
-    await expect(app.page.getByText('%40')).toBeHidden();
-    await expect(app.page.getByText('&#64;')).toBeHidden();
-    await expect(app.page.getByText('&commat;')).toBeHidden();
-    await expect(app.page.getByText('Alt+0192')).toBeHidden();
-    await expect(app.page.getByText('\\000040')).toBeHidden();
+    // Make sure Unicode value don't sneak in (regresses bug)
+    await app.expectHiddenText('U+40')
+    await app.expectHiddenText('U+1f405')
+    await app.expectHiddenText('&#x40;')
+    await app.expectHiddenText('%40')
+    await app.expectHiddenText('&#64;')
+    await app.expectHiddenText('&commat;')
+    await app.expectHiddenText('Alt+0192')
+    await app.expectHiddenText('\\000040')
 
     await app.changeNumberMode('CSS Property Values')
     await app.expectSymbolResult('\\000040')
-    await expect(app.page.getByText('U+40')).toBeHidden();
-    await expect(app.page.getByText('U+1f405')).toBeHidden();
-    await expect(app.page.getByText('&#x40;')).toBeHidden();
-    await expect(app.page.getByText('%40')).toBeHidden();
-    await expect(app.page.getByText('&#64;')).toBeHidden();
-    await expect(app.page.getByText('&commat;')).toBeHidden();
-    await expect(app.page.getByText('"@"')).toBeHidden();
-    await expect(app.page.getByText('Alt+0192')).toBeHidden();
+    await app.expectHiddenText('U+40')
+    await app.expectHiddenText('U+1f405')
+    await app.expectHiddenText('&#x40;')
+    await app.expectHiddenText('%40')
+    await app.expectHiddenText('&#64;')
+    await app.expectHiddenText('&commat;')
+    await app.expectHiddenText('"@"')
+    await app.expectHiddenText('Alt+0192')
 
     await app.changeNumberMode('Windows Alt Keys')
     await app.expectSymbolResult('À')
     await app.expectSymbolResult('Alt+0192')
-    await expect(app.page.getByText('U+40')).toBeHidden();
-    await expect(app.page.getByText('U+1f405')).toBeHidden();
-    await expect(app.page.getByText('&#x40;')).toBeHidden();
-    await expect(app.page.getByText('%40')).toBeHidden();
-    await expect(app.page.getByText('&#64;')).toBeHidden();
-    await expect(app.page.getByText('&commat;')).toBeHidden();
-    await expect(app.page.getByText('"@"')).toBeHidden();
-    await expect(app.page.getByText('\\000040')).toBeHidden();
+    await app.expectHiddenText('U+40')
+    await app.expectHiddenText('U+1f405')
+    await app.expectHiddenText('&#x40;')
+    await app.expectHiddenText('%40')
+    await app.expectHiddenText('&#64;')
+    await app.expectHiddenText('&commat;')
+    await app.expectHiddenText('"@"')
+    await app.expectHiddenText('\\000040')
 
     await app.changeNumberMode('URL Encoding - %N')
     await app.expectSymbolResult('%40')
-    await expect(app.page.getByText('U+40')).toBeHidden();
-    await expect(app.page.getByText('U+1f405')).toBeHidden();
-    await expect(app.page.getByText('&#x40;')).toBeHidden();
-    await expect(app.page.getByText('&#64;')).toBeHidden();
-    await expect(app.page.getByText('&commat;')).toBeHidden();
-    await expect(app.page.getByText('"@"')).toBeHidden();
-    await expect(app.page.getByText('Alt+0192')).toBeHidden();
-    await expect(app.page.getByText('\\000040')).toBeHidden();
+    await app.expectHiddenText('U+40')
+    await app.expectHiddenText('U+1f405')
+    await app.expectHiddenText('&#x40;')
+    await app.expectHiddenText('&#64;')
+    await app.expectHiddenText('&commat;')
+    await app.expectHiddenText('"@"')
+    await app.expectHiddenText('Alt+0192')
+    await app.expectHiddenText('\\000040')
 
 
     await app.changeNumberMode('Unicode - U+0000')
     await app.expectSymbolResult('U+40')
     await app.expectSymbolResult('U+1f405')
-    await expect(app.page.getByText('&#x40;')).toBeHidden();
-    await expect(app.page.getByText('%40')).toBeHidden();
-    await expect(app.page.getByText('&#64;')).toBeHidden();
-    await expect(app.page.getByText('&commat;')).toBeHidden();
-    await expect(app.page.getByText('"@"')).toBeHidden();
-    await expect(app.page.getByText('Alt+0192')).toBeHidden();
-    await expect(app.page.getByText('\\000040')).toBeHidden();
+    await app.expectHiddenText('&#x40;')
+    await app.expectHiddenText('%40')
+    await app.expectHiddenText('&#64;')
+    await app.expectHiddenText('&commat;')
+    await app.expectHiddenText('"@"')
+    await app.expectHiddenText('Alt+0192')
+    await app.expectHiddenText('\\000040')
 
     await app.changeNumberMode('None')
-    await expect(app.page.getByText('U+40')).toBeHidden();
-    await expect(app.page.getByText('U+1f405')).toBeHidden();
-    await expect(app.page.getByText('&#x40;')).toBeHidden();
-    await expect(app.page.getByText('%40')).toBeHidden();
-    await expect(app.page.getByText('&#64;')).toBeHidden();
-    await expect(app.page.getByText('&commat;')).toBeHidden();
-    await expect(app.page.getByText('"@"')).toBeHidden();
-    await expect(app.page.getByText('Alt+0192')).toBeHidden();
-    await expect(app.page.getByText('\\000040')).toBeHidden();
+    await app.expectHiddenText('U+40')
+    await app.expectHiddenText('U+1f405')
+    await app.expectHiddenText('&#x40;')
+    await app.expectHiddenText('%40')
+    await app.expectHiddenText('&#64;')
+    await app.expectHiddenText('&commat;')
+    await app.expectHiddenText('"@"')
+    await app.expectHiddenText('Alt+0192')
+    await app.expectHiddenText('\\000040')
 
     await app.changeNumberMode('HTML - Hex')
 

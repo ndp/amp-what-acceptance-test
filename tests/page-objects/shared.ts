@@ -22,8 +22,16 @@ export class Shared {
     return expect(this.page.getByText(text)).toBeVisible(options)
   }
 
+  async expectHiddenText(text: string) {
+    return expect(this.page.getByText(text)).toBeHidden()
+  }
+
   async scrollToTop() {
     return this.page.evaluate(() => window.scrollTo(0, 0))
+  }
+
+  supportsCopyToClipboard(): boolean {
+    return true
   }
 
 }

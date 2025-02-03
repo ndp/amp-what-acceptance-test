@@ -3,9 +3,9 @@ import { App } from './page-objects/app'
 import {expectedMatchesFor} from './data/util'
 
 
-test.describe('AmpWhat.com links', () => {
+test.describe('AmpWhat.com example queries', () => {
 
-  test('click through all sample queries', async ({ page }) => {
+  test('clicking yields expected results', async ({ page }) => {
 
     const app = new App(page)
     await app.goto('/')
@@ -29,6 +29,5 @@ test.describe('AmpWhat.com links', () => {
     }
 
   })
-
 
 })

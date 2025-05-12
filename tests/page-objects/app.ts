@@ -161,12 +161,45 @@ export class App extends Shared {
                            | 'Windows Alt Keys'
                            | 'Unicode - U+0000'
                            | 'None') {
-    await this.page.getByText('⛭').click()
-    await this.page.selectOption('#change-mode', newMode)
-    await this.page.getByText('Close', {exact: true}).click()
+    const settings = await this.openSettings()
+    await settings.page.selectOption('#change-mode', newMode)
+    settings.close()
   }
+
+  async openSettings() {
+
+    await this.page.evaluate(() => window.scrollTo(0, 0));
+
+    await this.page.getByText('⛭').click()
+    await expect(this.page.getByText('Close', {exact: true})).toBeVisible()
+
+    return new Settings(this.page)
+  }
+
 }
 
+class Settings extends Shared {
 
+  async expectDataSet(size:'default'|'large') {
+    const radioButton = this.page.locator(`input[type="radio"][name="dataset"][value="${size}"]`);
+    await expect(radioButton).toBeVisible()
+    await expect(radioButton).toBeChecked()
+  }
+
+  async selectDataSet(size: 'default'|'large') {
+
+    const radioButton = this.page.locator(`input[type="radio"][name="dataset"][value="${size}"]`);
+
+    await radioButton.click()
+    await this.expectVisibleText(' Unicode characters loaded', {timeout: 10000})
+
+  }
+
+
+  async close () {
+    await this.page.getByText('Close', {exact: true}).click()
+    await expect(this.page.getByText('Close', {exact: true})).toBeHidden()
+  }
+}
 
 

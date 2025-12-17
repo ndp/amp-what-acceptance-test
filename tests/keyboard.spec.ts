@@ -10,7 +10,7 @@ test.describe('Keyboard', () => {
     await app.expectSymbolResult('$')
     await app.expectSymbolResult('💶')
     await app.expectSymbolResult('🤑')
-    const details = await app.viewDetailsForResultNumber(17)
+    const details = await app.viewDetailsForResultNumber(18)
     await details.expectVisibleElement('money-mouth face')
     await details.clickToCopy('paid')
   })

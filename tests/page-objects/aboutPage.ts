@@ -4,7 +4,7 @@ import {expect, Page} from "@playwright/test";
 export class AboutPage extends Shared {
   private inDialog: boolean;
 
-  constructor(page: Page, inDialog = false) {
+  constructor(page: Page, { inDialog} = { inDialog: false }) {
     super(page)
     this.inDialog = inDialog;
   }

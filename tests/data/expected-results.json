@@ -25,9 +25,8 @@
     "bullet",
     "dotted circle"
   ],
-  "computer": ["keyboard", "dvd"],
+  "computer": ["keyboard", "dvd", "floppy disk"],
   "cross": "latin cross",
-  "computer": "floppy disk",
   "currency": "banknote euro sign",
   "danger": ["high voltage sign", "bomb", "skull and crossbones"],
   "dark skin tone": "raised hand",

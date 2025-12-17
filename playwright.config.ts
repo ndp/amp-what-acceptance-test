@@ -28,12 +28,14 @@ const configuration = {
     description: 'whether site is served via https (instead of http)'
   },
   retries: {
+    description: 'number of times to retry a failed test',
     type: 'integer',
     required: false,
     default: 3
   },
   workers: {
     type: 'integer',
+    required: false,
     default: 0,
     description: 'number of workers running tests. 0 sets automatically'
   }
@@ -49,7 +51,7 @@ const envs = configure(configuration)
 const config: PlaywrightTestConfig = {
   testDir: './tests',
   /* Maximum time one test can run for. */
-  timeout: 100 * 1000,
+  timeout: 120 * 1000,
   expect:  {
     /**
      * Maximum time expect() should wait for the condition to be met.

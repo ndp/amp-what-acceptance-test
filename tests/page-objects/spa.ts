@@ -2,8 +2,8 @@ import {expect, Page, test} from '@playwright/test'
 import {Shared} from "./shared";
 import {DetailView} from "./detailView";
 import {AboutPage} from "./aboutPage";
+import {Settings} from './settings'
 
-const PAGE_LOAD_TIMEOUT_MS = 15000
 
 test.beforeEach(async ({page}) => {
   await page.route(/googletagmanager|rollbar|google-analytics|adtraffic|doubleclick|googlesyndication/,
@@ -13,47 +13,15 @@ test.beforeEach(async ({page}) => {
   })
 })
 
-export class App extends Shared {
+export class Spa extends Shared {
 
   constructor(page: Page) {
     super(page)
   }
 
-  async goto(path = '/', options: { resetClipboard?: boolean } = {}) {
-    await this.page.goto(path, {timeout: PAGE_LOAD_TIMEOUT_MS})
-
-    if (path === '/') {
-      await expect(this.page).toHaveTitle('Discover Unicode Character Entities & Symbols | AmpWhat')
-    }
-
-    await expect(this.page.getByText('Andrew J. Peterson')).toBeVisible()
-    await expect(this.page.getByText('All Rights Reserved')).toBeVisible()
-
-    if (options.resetClipboard) {
-      await this.page.evaluate('navigator.clipboard.writeText("")')
-      await this.expectClipboardContents('')
-    }
-
-    return
-    // return new Promise(resolve => setTimeout(resolve, 500))
-  }
-
-  async gotoLandingPage(q: string) {
-    return this.page.goto(`/unicode/search/${encodeURIComponent(q)}`, {timeout: PAGE_LOAD_TIMEOUT_MS})
-
-  }
-
-  async clickLink(s: string) {
-    return this.page.locator(`a:text-is("${s}")`).click()
-  }
-
-  async clickLinkWithTitle(s: string) {
-    return this.page.locator('a[title="' + s + '"]').click()
-  }
-
   async searchFor(
     q: string,
-    modifier?: 'normal' | 'slowly' = 'normal'
+    modifier: 'normal' | 'slowly' = 'normal'
   ) {
     const locator = this.qLocator
     await locator.fill('')
@@ -72,17 +40,6 @@ export class App extends Shared {
     }
   }
 
-  async expectPath(p: string) {
-    return this.page.waitForFunction(expectedPath => document.location.pathname === expectedPath, p, {
-      polling: 250,
-      timeout: 5000
-    })
-  }
-
-  async expectPageTitleContains(s: string) {
-    expect(await this.page.title()).toContain(s)
-  }
-
   async viewDetails(s: string): Promise<DetailView> {
     await this.expectSymbolResult(s, {scrollTo: true})
     await this.page.getByText(s, {exact: true}).click()
@@ -99,11 +56,6 @@ export class App extends Shared {
     return new DetailView(this.page)
   }
 
-  async expectVisibleElement(text: string, options?: { timeout?: number }) {
-    const locator = this.page.getByText(text, {exact: true})
-    return expect(locator).toBeVisible(options)
-  }
-
   async expectSymbolResult(str: string, options?: { scrollTo?: boolean, timeout?: number }) {
     const locator = this.page.getByText(str).locator('visible=true').first()
     if (options?.scrollTo)
@@ -117,10 +69,6 @@ export class App extends Shared {
     if (options?.scrollTo)
       await locator.scrollIntoViewIfNeeded()
     return expect(locator).toBeVisible(options)
-  }
-
-  async expectNoTextMatching(str: string) {
-    return expect(this.page.locator('body')).not.toContainText(str)
   }
 
   async clickShowMore() {
@@ -163,7 +111,7 @@ export class App extends Shared {
                            | 'None') {
     const settings = await this.openSettings()
     await settings.page.selectOption('#change-mode', newMode)
-    settings.close()
+    return settings.close()
   }
 
   async openSettings() {
@@ -176,30 +124,6 @@ export class App extends Shared {
     return new Settings(this.page)
   }
 
-}
-
-class Settings extends Shared {
-
-  async expectDataSet(size:'default'|'large') {
-    const radioButton = this.page.locator(`input[type="radio"][name="dataset"][value="${size}"]`);
-    await expect(radioButton).toBeVisible()
-    await expect(radioButton).toBeChecked()
-  }
-
-  async selectDataSet(size: 'default'|'large') {
-
-    const radioButton = this.page.locator(`input[type="radio"][name="dataset"][value="${size}"]`);
-
-    await radioButton.click()
-    await this.expectVisibleText(' Unicode characters loaded', {timeout: 10000})
-
-  }
-
-
-  async close () {
-    await this.page.getByText('Close', {exact: true}).click()
-    await expect(this.page.getByText('Close', {exact: true})).toBeHidden()
-  }
 }
 
 

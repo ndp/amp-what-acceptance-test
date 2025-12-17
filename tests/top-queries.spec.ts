@@ -1,5 +1,5 @@
 import { test } from '@playwright/test'
-import { App } from './page-objects/app'
+import { Spa } from './page-objects/spa'
 import * as fs from 'fs'
 import path from 'path'
 import {expectedMatchesFor} from './data/util'
@@ -22,14 +22,14 @@ test.describe('Top Queries', () => {
     for (const match of matches) {
 
       test(`Landing page for "${q}" has "${match}" character`, async ({ page }) => {
-        const app = new App(page)
+        const app = new Spa(page)
         await app.gotoLandingPage(q)
         await app.expectCurrentQuery(q)
         await app.expectSymbolResult(match)
       })
 
       test(`Search for "${q}" shows "${match}" character`, async ({ page }) => {
-        const app = new App(page)
+        const app = new Spa(page)
         await app.goto('/')
         await app.searchFor(q)
         await app.expectCurrentQuery(q)
@@ -39,7 +39,7 @@ test.describe('Top Queries', () => {
   }
 
   test(`Landing page for "flag" has "flag in hole" character`, async ({ page }) => {
-    const app = new App(page)
+    const app = new Spa(page)
     await app.gotoLandingPage('flag')
     await app.expectCurrentQuery('flag')
     await app.clickShowMore()
@@ -47,7 +47,7 @@ test.describe('Top Queries', () => {
   })
 
   test(`Search for "flag" shows "flag in hole" character`, async ({ page }) => {
-    const app = new App(page)
+    const app = new Spa(page)
     await app.goto('/')
     await app.searchFor('flag')
     await app.expectCurrentQuery('flag')

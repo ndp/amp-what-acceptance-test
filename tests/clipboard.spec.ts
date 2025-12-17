@@ -1,11 +1,11 @@
 import { test } from '@playwright/test'
-import { App } from './page-objects/app'
+import { Spa } from './page-objects/spa'
 
 
 test.describe('AmpWhat.com clipboard', () => {
 
   test('Copy symbol inside details view', async ({ page }) => {
-    const app = new App(page)
+    const app = new Spa(page)
     await app.goto('/', { resetClipboard: true })
     await app.searchFor('zombie')
     const details = await app.viewDetails('&#129503;')
@@ -16,7 +16,7 @@ test.describe('AmpWhat.com clipboard', () => {
   })
 
   test('Copy with "C" inside details view', async ({ page }) => {
-    const app = new App(page)
+    const app = new Spa(page)
     await app.goto('/', { resetClipboard: true })
     await app.searchFor('dog')
     const details = await app.viewDetails('𓃡')
@@ -27,7 +27,7 @@ test.describe('AmpWhat.com clipboard', () => {
   })
 
   test('Copy number inside details view', async ({ page }) => {
-    const app = new App(page)
+    const app = new Spa(page)
     await app.goto('/', { resetClipboard: true })
     await app.searchFor('zombie')
     const details = await app.viewDetails('&#129503;')
@@ -38,7 +38,7 @@ test.describe('AmpWhat.com clipboard', () => {
   })
 
   test('Copy symbol in grid view using clicks', async ({ page }) => {
-    const app = new App(page)
+    const app = new Spa(page)
     await app.goto('/', { resetClipboard: true })
     await app.searchFor('horse')
     await page.press('#q', 'Tab')
@@ -50,7 +50,7 @@ test.describe('AmpWhat.com clipboard', () => {
   })
 
   test('Copy symbol in grid view using keyboard', async ({ page }) => {
-    const app = new App(page)
+    const app = new Spa(page)
     await app.goto('/', { resetClipboard: true })
     await app.searchFor('horse')
     await app.expectClipboardContents('')

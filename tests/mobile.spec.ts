@@ -1,9 +1,9 @@
 import { test } from '@playwright/test'
-import { App } from './page-objects/app'
+import { Spa } from './page-objects/spa'
 
 test.describe('Mobile', () => {
   test('Visit AmpWhat on a small screen', async ({ page }) => {
-    const app = new App(page)
+    const app = new Spa(page)
     await app.goto('/')
 
     await app.searchFor('money', 'slowly')

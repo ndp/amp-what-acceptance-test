@@ -1,10 +1,10 @@
 import {test} from "@playwright/test";
-import {App} from "./page-objects/app";
+import {Spa} from "./page-objects/spa";
 
 test.describe('Features', () => {
 
   test('Forward and back', async ({page}) => {
-    const app = new App(page)
+    const app = new Spa(page)
     await app.goto('/')
     await app.searchFor('esperanto')
     await app.expectSymbolResult('ŭ')
@@ -21,7 +21,7 @@ test.describe('Features', () => {
   })
 
   test('Load More', async ({page}) => {
-    const app = new App(page)
+    const app = new Spa(page)
 
     await app.goto('/')
 
@@ -52,7 +52,7 @@ test.describe('Features', () => {
 
   test('Change number mode', async ({page}) => {
 
-    const app = new App(page)
+    const app = new Spa(page)
 
     await app.goto('/')
     await app.searchFor('cat')

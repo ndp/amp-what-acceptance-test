@@ -1,5 +1,5 @@
 import {test} from '@playwright/test'
-import {App} from './page-objects/app'
+import {Spa} from './page-objects/spa'
 import {expectedMatchesFor} from './data/util'
 
 
@@ -7,7 +7,7 @@ test.describe('Sample queries', () => {
 
   test('clicking yields expected results', async ({page}) => {
 
-    const app = new App(page)
+    const app = new Spa(page)
     await app.goto('/')
 
     const links = app.page.locator('#hints a[href^="/unicode/search"]')

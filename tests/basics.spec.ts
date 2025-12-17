@@ -80,21 +80,14 @@ test.describe('AmpWhat.com basics', () => {
     await app.goto('/')
   })
 
-  test('query using paste of value', async ({page, context}) => {
-
-    // try {
-      const app = new Spa(page)
-      await app.goto('/', {resetClipboard: 'heart'})
-      await app.qLocator.fill('')
-      await app.qLocator.click()
-      await app.page.keyboard.press('Control+V') // or Command+V on Mac
-      await app.expectCurrentQuery('heart')
-      await app.expectCharacterResult('♥')
-      await app.expectCharacterResult('💖')
-    // } catch (e) {
-    //   if (e instanceof Error && e.message.includes('Unknown permission'))
-    //     return
-    //   throw e
-    // }
+  test('query using paste of value', async ({page}) => {
+    const app = new Spa(page)
+    await app.goto('/', {resetClipboard: 'heart'})
+    await app.qLocator.fill('')
+    await app.qLocator.click()
+    await app.page.keyboard.press('Control+V') // or Command+V on Mac
+    await app.expectCurrentQuery('heart')
+    await app.expectCharacterResult('♥')
+    await app.expectCharacterResult('💖')
   })
 })

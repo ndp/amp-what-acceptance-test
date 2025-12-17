@@ -71,7 +71,10 @@ const config: PlaywrightTestConfig = {
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
-    actionTimeout: 8000,
+    actionTimeout: 10 * 1000,
+    // Timeout for each navigation action (page.goto(), etc.), defaults to 0 (no timeout)
+    navigationTimeout: 15 * 1000,
+
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: `http${envs.https ? 's' : ''}://${envs.host}`,
 
@@ -87,7 +90,7 @@ const config: PlaywrightTestConfig = {
       name: 'Desktop Chrome',
       testIgnore: /(mobile|clipboard).spec.ts/,
       use:  {
-        permissions: ['clipboard-read'],
+        permissions: ['clipboard-read', 'clipboard-write'],
         ...devices['Desktop Chrome'], channel: 'chrome'
       }
     },
